@@ -60,5 +60,8 @@ Makefile
 README.md
 web.config
 
+# Silverstripe custom config
+mysite/_config.php
+
 # Silverstripe module
 silverstripe-blog
