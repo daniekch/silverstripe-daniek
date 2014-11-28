@@ -41,3 +41,24 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Eclipse
+.settings/org.eclipse.php.core.prefs
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.buildpath
+.project
+
+# Silverstripe default installation
+assets
+cms
+framework
+vendor
+.htaccess
+CONTRIBUTING.md
+index.php
+Makefile
+README.md
+web.config
+
+# Silverstripe module
+silverstripe-blog
