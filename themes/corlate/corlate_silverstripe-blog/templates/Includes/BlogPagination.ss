@@ -11,9 +11,7 @@
 				<li class="active"><a href="#">{$PageNum}</a></li>
 			<% else %>
 				<% if Link %>
-					<li>
-						<li><a href="{$Link}">{$PageNum}</a></li>
-					</li>
+					<li><a href="{$Link}">{$PageNum}</a></li>
 				<% else %>
 					<li><a href="#">{$PageNum}</a></li>
 				<% end_if %>

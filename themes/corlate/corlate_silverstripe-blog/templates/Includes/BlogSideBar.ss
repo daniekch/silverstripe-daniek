@@ -18,21 +18,21 @@
                 <img src="images/blog/avatar3.png" alt=""  />
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
                 <div class="entry-meta small muted">
-                    <span>By <a href="#">Alex</a></span <span>On <a href="#">Creative</a></span>
+                    <span>By <a href="#">Alex</a></span> <span>On <a href="#">Creative</a></span>
                 </div>
             </div>
             <div class="single_comments">
                 <img src="images/blog/avatar3.png" alt=""  />
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
                 <div class="entry-meta small muted">
-                    <span>By <a href="#">Alex</a></span <span>On <a href="#">Creative</a></span>
+                    <span>By <a href="#">Alex</a></span> <span>On <a href="#">Creative</a></span>
                 </div>
             </div>
             <div class="single_comments">
                 <img src="images/blog/avatar3.png" alt=""  />
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
                 <div class="entry-meta small muted">
-                    <span>By <a href="#">Alex</a></span <span>On <a href="#">Creative</a></span>
+                    <span>By <a href="#">Alex</a></span> <span>On <a href="#">Creative</a></span>
                 </div>
             </div>
             
