@@ -28,106 +28,15 @@
 	
 	<body class="homepage">
 	
-	    <header id="header">
-	        <div class="top-bar">
-	            <div class="container">
-	                <div class="row">
-	                    <div class="col-sm-6 col-xs-4">
-	                        
-	                    </div>
-	                    <div class="col-sm-6 col-xs-8">
-	                       <div class="social">
-	                            <div class="search">
-	                                <form role="form">
-	                                    <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-	                                    <i class="fa fa-search"></i>
-	                                </form>
-	                           </div>
-	                       </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	
-	        <nav class="navbar navbar-inverse" role="banner">
-	            <div class="container">
-	                <div class="navbar-header">
-	                    <div id="logo">{ daniek::ch }</div>
-	                </div>
-					
-	                <div class="collapse navbar-collapse navbar-right">
-	                
-	                	<% include Navigation %>
-	                    
-	                </div>
-	            </div>
-	        </nav>
-			
-	    </header>
+	    <% include Header %>
 		
 		$Layout
 		$Form
 	
-	    <section id="bottom">
-	        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-	            <div class="row">
-	                <div class="col-md-3 col-sm-6">
-	                    <div class="widget">
-	                        <h3>Reisen</h3>
-	                        <ul>
-	                            <li><a href="{$BaseHref}reisen/oman">Oman</a></li>
-	                            <li><a href="{$BaseHref}reisen/kanada">Kanada</a></li>
-	                            <li><a href="{$BaseHref}reisen/schottland">Schottland</a></li>
-	                        </ul>
-	                    </div>    
-	                </div>
-	
-	                <div class="col-md-3 col-sm-6">
-	                    <div class="widget">
-	                        <h3>Movecount</h3>
-	                        <ul>
-	                            <li><a href="{$BaseHref}movecount">Routen</a></li>
-	                        </ul>
-	                    </div>    
-	                </div>
-	
-	                <div class="col-md-3 col-sm-6">
-	                    <div class="widget">
-	                        <h3>Home</h3>
-	                        <ul>
-	                            <li><a href="{$BaseHref}">Home</a></li>
-	                        </ul>
-	                    </div>    
-	                </div>
-	
-	                <div class="col-md-3 col-sm-6">
-	                    <div class="widget">
-	                        <h3>Kontakt</h3>
-	                        <ul>
-	                            <li><a href="{$BaseHref}kontakt">Kontakt</a></li>
-	                        </ul>
-	                    </div>    
-	                </div>
-	            </div>
-	        </div>
-	    </section>
-	
-	    <footer id="footer" class="midnight-blue">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-sm-6">
-	                    &copy; {$Now.Year} <a target="_blank" href="{$BaseHref}" title="Daniek">Daniek</a>. All Rights Reserved.
-	                </div>
-	                <div class="col-sm-6">
-	                    <ul class="pull-right">
-	                        <li><a href="{$BaseHref}">Home</a></li>
-	                        <li><a href="{$BaseHref}kontakt">Kontakt</a></li>
-	                    </ul>
-	                </div>
-	            </div>
-	        </div>
-	    </footer>
-	
+		<% include Bottom %>
+		
+		<% include Footer %>
+		
 	    <script src="{$ThemeDir}/js/jquery.js"></script>
 	    <script src="{$ThemeDir}/js/bootstrap.min.js"></script>
 	    <script src="{$ThemeDir}/js/jquery.prettyPhoto.js"></script>
