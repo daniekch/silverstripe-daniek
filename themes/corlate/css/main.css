@@ -270,7 +270,7 @@ input.search-form:hover {
   padding-bottom: 0;
 }
 
- .navbar-nav{
+.navbar-nav{
   margin-top: 12px;
  }
 
@@ -355,6 +355,11 @@ input.search-form:hover {
 .navbar-inverse .navbar-form {
   border-top: 0;
   padding-bottom: 0;
+}
+
+.navbar-inverse .navbar-header #logo {
+	color: wheat;
+	font-size: 3em;
 }
 
 

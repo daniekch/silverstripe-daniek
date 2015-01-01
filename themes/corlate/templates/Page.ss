@@ -52,7 +52,7 @@
 	        <nav class="navbar navbar-inverse" role="banner">
 	            <div class="container">
 	                <div class="navbar-header">
-	                    { daniek::ch }
+	                    <div id="logo">{ daniek::ch }</div>
 	                </div>
 					
 	                <div class="collapse navbar-collapse navbar-right">
