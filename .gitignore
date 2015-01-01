@@ -65,3 +65,4 @@ mysite/_config.php
 
 # Silverstripe module
 silverstripe-blog
+silverstripe-comments
