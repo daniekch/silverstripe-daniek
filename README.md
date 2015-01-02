@@ -6,6 +6,7 @@ daniek project with requires additional modules to function:
  * [`cms`](http://github.com/silverstripe/silverstripe-cms): Module including a Content Management System
  * [`blog`](http://github.com/silverstripe/silverstripe-blog): Blog Module
  * [`comments`](http://github.com/silverstripe/silverstripe-comments): Page comments module
+ * [`widgets`](http://github.com/silverstripe/silverstripe-widgets): Widget module
 
 ## Installation ##
 
