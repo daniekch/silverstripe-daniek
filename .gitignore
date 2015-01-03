@@ -63,7 +63,7 @@ web.config
 mysite/_config.php
 
 # Silverstripe module
-silverstripe-blog
-silverstripe-comments
-silverstripe-widgets
-silverstripe-gridFieldBulkEditingTools
+blog
+comments
+widgets
+gridFieldBulkEditingTools
