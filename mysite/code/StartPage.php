@@ -15,11 +15,11 @@ class StartPage extends Page {
 	
 	function getCMSFields() {
 		$fields = parent::getCMSFields();
-		$fields->addFieldToTab("Root.Slider 1", new TextField("Slider_Title_1", "Title"));
-		$fields->addFieldToTab("Root.Slider 1", new TextField("Slider_Lead_1", "Lead"));
-		$fields->addFieldToTab("Root.Slider 1", new TextField("Slider_Link_1", "Link"));
-		$fields->addFieldToTab("Root.Slider 1", new UploadField('Slider_Backround_Image_1', 'Background Image'));
-		$fields->addFieldToTab("Root.Slider 1", new UploadField('Slider_Overlay_Image_1', 'Overlay Image'));
+		$fields->addFieldToTab("Root.Slider Item 1", new TextField("Slider_Title_1", "Title"));
+		$fields->addFieldToTab("Root.Slider Item 1", new TextField("Slider_Lead_1", "Lead"));
+		$fields->addFieldToTab("Root.Slider Item 1", new TextField("Slider_Link_1", "Link"));
+		$fields->addFieldToTab("Root.Slider Item 1", new UploadField('Slider_Backround_Image_1', 'Background Image'));
+		$fields->addFieldToTab("Root.Slider Item 1", new UploadField('Slider_Overlay_Image_1', 'Overlay Image'));
 		
 		return $fields;
 	}
@@ -44,7 +44,7 @@ class StartPage_Controller extends Page_Controller {
                 'Lead' => $currentPage->Slider_Lead_1,
         		'Link' => $currentPage->Slider_Link_1,
         		'BackgroundImage' => File::get()->byID($currentPage->Slider_Backround_Image_1ID),
-        		'OverlayImageUrl' => File::get()->byID($currentPage->Slider_Overlay_Image_1ID)
+        		'OverlayImage' => File::get()->byID($currentPage->Slider_Overlay_Image_1ID)
             ))
     	));
 	}
