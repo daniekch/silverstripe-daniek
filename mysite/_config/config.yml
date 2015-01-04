@@ -9,6 +9,9 @@ After:
 # Caution: Indentation through two spaces, not tabs
 SSViewer:
   theme: 'corlate'
+  
+Director:
+ environment_type: 'dev'
 
 Page:
   extensions:
