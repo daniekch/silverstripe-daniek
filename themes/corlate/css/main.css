@@ -2135,6 +2135,11 @@ ul.faq li > div h3 {
   font-size: 30px;
 }
 
+.blog .blog-item .blog-content img.right {
+  float: right;
+  margin: 5px 0px 5px 5px;
+}
+
 .readmore{
   margin-top: 0;
 }
@@ -2149,7 +2154,7 @@ ul.faq li > div h3 {
 }
 
 .post-tags {
-
+	margin-bottom: 10px;
 }
 
 .blog .blog-item .entry-meta {
