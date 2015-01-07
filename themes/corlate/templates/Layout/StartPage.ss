@@ -10,10 +10,10 @@
 			<% loop Slider %>
 				<% if $BackgroundImage %>
 					<% with $BackgroundImage %>
-						<div class="item active" style="background-image: url({$URL})">
+						<div class="item <% if $Up.First %>active<% end_if %>" style="background-image: url({$URL})">
 					<% end_with %>
 				<% else %>
-					<div class="item active">
+					<div class="item <% if $Up.First %>active<% end_if %>">
 				<% end_if %>
 	                <div class="container">
 	                    <div class="row slide-margin">
