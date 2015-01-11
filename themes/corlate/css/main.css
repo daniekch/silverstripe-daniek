@@ -2137,7 +2137,12 @@ ul.faq li > div h3 {
 
 .blog .blog-item .blog-content img.right {
   float: right;
-  margin: 5px 0px 5px 5px;
+  margin: 5px 0px 5px 20px;
+}
+
+.blog .blog-item .blog-content img.left {
+  float: left;
+  margin: 5px 20px 5px 0px;
 }
 
 .readmore{
