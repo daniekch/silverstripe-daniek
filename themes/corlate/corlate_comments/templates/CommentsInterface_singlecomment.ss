@@ -4,7 +4,7 @@
 	</div>
 	<div class="media-body post_reply_comments">
 	    <h3>{$AuthorName.XML}</h3>
-	    <h4>{$Created.Nice}</h4>
+	    <h4>{$Created.DayOfMonth} {$Created.ShortMonth} {$Created.Year} {$Created.Time24}</h4>
 	    {$EscapedComment}
 	</div>
 </div>
