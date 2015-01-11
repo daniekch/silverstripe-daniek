@@ -1,0 +1,3 @@
+CommentingController:
+  extensions:
+    - 'CommentControllerExtension'
