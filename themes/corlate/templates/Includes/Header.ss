@@ -6,7 +6,16 @@
                     
                 </div>
                 <div class="col-sm-6 col-xs-8">
-                   <div class="social">
+                   	<div class="social">
+                		<ul class="social-share login">
+                			<li>
+                			<% if $CurrentMember %>
+                				Willkommen {$CurrentMember.Name} <a href="{$baseHref}Security/logout">Log out</a>
+							<% else %>
+								<a href="{$baseHref}Security/login">Log in</a>
+							<% end_if %>
+							</li>
+                		</ul>
                         <div class="search">
                             <form role="form">
                                 <input type="text" class="search-form" autocomplete="off" placeholder="Search">
