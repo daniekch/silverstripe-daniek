@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 	<head>
 		<% base_tag %>
 	    <meta charset="utf-8">
@@ -20,10 +20,6 @@
 	    <script src="{$ThemeDir}/js/respond.min.js"></script>
 	    <![endif]-->       
 	    <link rel="shortcut icon" href="{$ThemeDir}/images/ico/favicon.ico">
-	    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$ThemeDir}/images/ico/apple-touch-icon-144-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$ThemeDir}/images/ico/apple-touch-icon-114-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$ThemeDir}/images/ico/apple-touch-icon-72-precomposed.png">
-	    <link rel="apple-touch-icon-precomposed" href="{$ThemeDir}/images/ico/apple-touch-icon-57-precomposed.png">
 	</head><!--/head-->
 	
 	<body class="homepage">
