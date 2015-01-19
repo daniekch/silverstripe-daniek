@@ -1,5 +1,3 @@
-<% if SideBarView %>
-	<div id="Sidebar" class="typography">
-		$SideBarView
-	</div>
+<% if $SideBarView %>
+	{$SideBarView}
 <% end_if %>
