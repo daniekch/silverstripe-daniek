@@ -20,6 +20,9 @@
 	    <script src="{$ThemeDir}/js/respond.min.js"></script>
 	    <![endif]-->       
 	    <link rel="shortcut icon" href="{$ThemeDir}/images/ico/favicon.ico">
+	    
+	    <% include GoogleAnalytics %>
+		
 	</head><!--/head-->
 	
 	<body class="homepage">

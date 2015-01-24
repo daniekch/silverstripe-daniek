@@ -16,3 +16,7 @@ Director:
 Page:
   extensions:
     - WidgetPageExtension
+    
+  googleAnalytics:
+    enabled: 'true'
+    accountId: 'UA-31886076-1'
