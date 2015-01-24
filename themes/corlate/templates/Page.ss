@@ -21,6 +21,8 @@
 	    <![endif]-->       
 	    <link rel="shortcut icon" href="{$ThemeDir}/images/ico/favicon.ico">
 	    
+	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	    
 	    <% include GoogleAnalytics %>
 		
 	</head><!--/head-->
