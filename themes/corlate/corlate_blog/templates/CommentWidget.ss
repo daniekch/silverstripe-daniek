@@ -7,7 +7,7 @@
 	                <img src="{$ThemeDir}/images/blog/avatar3.png" alt="">
 	                <p>{$Comment}</p>
 	                <div class="entry-meta small muted">
-	                    By {$Name}
+                        <span>Von <a href="#">{$Name}</a></span>in <a href="{$Link}">{$ParentTitle}</a>
 	                </div>
 	            </div>
             <% end_loop %>
