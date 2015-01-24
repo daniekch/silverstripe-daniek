@@ -1,4 +1,4 @@
-<div class="media comment_section">
+<div class="media comment_section" id="{$Permalink}">
 	<div class="pull-left post_comments">
 	    <a href="#"><img src="{$ThemeDir}/images/blog/avatar3.png" class="img-circle" alt="Avatar" /></a>
 	</div>
