@@ -2,11 +2,10 @@
 <html lang="de">
 	<head>
 		<% base_tag %>
-	    <meta charset="utf-8">
+	    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
-	    <title>Daniek::ch</title>
+	    <title><% if $MetaTitle %>{$MetaTitle}<% else %>{$Title}<% end_if %><% if $Subtitle %> - {$Subtitle}<% end_if %> &raquo; {$SiteConfig.Title}</title>
+		<meta name="description" content="{$MetaDescription}" />
 		
 		<!-- core CSS -->
 	    <link href="{$ThemeDir}/css/bootstrap.min.css" rel="stylesheet">
