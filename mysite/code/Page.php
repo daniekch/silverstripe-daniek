@@ -2,10 +2,17 @@
 class Page extends SiteTree {
 
 	private static $db = array(
+		'Subtitle' => 'Varchar(255)'
 	);
 
 	private static $has_one = array(
 	);
+	
+	function getCMSFields() {
+		$fields = parent::getCMSFields();
+		$fields->addFieldToTab("Root.Main", new TextField("Subtitle", 'Untertitel'), 'URLSegment');
+		return $fields;
+	}
 
 }
 class Page_Controller extends ContentController {
