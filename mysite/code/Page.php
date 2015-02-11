@@ -50,5 +50,15 @@ class Page_Controller extends ContentController {
 				'accountId' => $googleAnalytics["accountId"]
 		));
 	}
+	
+	public function MetaRobots()
+	{
+		if($this->URLSegment == 'Security')
+		{
+			return "noindex, nofollow";
+		}
+		
+		return "index, follow";
+	}
 
 }

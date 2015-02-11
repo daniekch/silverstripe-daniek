@@ -6,6 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title><% if $MetaTitle %>{$MetaTitle}<% else %>{$Title}<% end_if %><% if $Subtitle %> - {$Subtitle}<% end_if %> &raquo; {$SiteConfig.Title}</title>
 		<meta name="description" content="{$MetaDescription}" />
+		<meta name="robots" content="{$MetaRobots}" />
 		
 		<!-- core CSS -->
 	    <link href="{$ThemeDir}/css/bootstrap.min.css" rel="stylesheet">
