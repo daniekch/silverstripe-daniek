@@ -68,3 +68,5 @@ comments
 widgets
 gridFieldBulkEditingTools
 .editorconfig
+mysite/logs/log_error.log
+mysite/logs/log_info.log

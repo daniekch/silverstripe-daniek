@@ -36,12 +36,19 @@ class CustomLoginForm extends MemberLoginForm
 	
     public function dologin($data) {
     	
+    	$logMessage = 'failed';
+    	
     	$movescountGroup = DataObject::get_by_id("Group", 3);
     	$member = $this->performLogin($data);
     	
-    	if($member && $member->inGroup($movescountGroup->ID)) {
-    		$this->LoginByMovesCount($data);
+    	if($member) {
+    		$logMessage = 'successfully';
+	    	if($member->inGroup($movescountGroup->ID)) {
+	    		$this->LoginByMovesCount($data);
+	    	}
     	}
+    	
+    	SS_Log::log('\''.$data['Email'].'\' login '.$logMessage.'.', SS_Log::INFO);
     	
     	parent::dologin($data);
     }

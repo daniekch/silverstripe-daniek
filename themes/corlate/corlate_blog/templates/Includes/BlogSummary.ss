@@ -23,7 +23,7 @@
 			<% end_if %>
             <h2><a href="{$Link}" title="<% _t('BlogSummary_ss.VIEWFULL', 'View full post titled -') %> '$Title'">{$MenuTitle}</a></h2>
             <h3><% if BlogHolder.ShowFullEntry %>$Content<% else %>$Content.FirstParagraph(html)<% end_if %></h3>
-            <a class="btn btn-primary readmore" href="{$Link}" title="<% _t('BlogSummary_ss.VIEWFULL', 'View full post titled -') %> '$Title'">Read More <i class="fa fa-angle-right"></i></a>
+            <a class="btn btn-primary readmore" href="{$Link}" title="mehr lesen zu {$Title}">mehr lesen <i class="fa fa-angle-right"></i></a>
         </div>
     </div>    
 </div>

@@ -390,7 +390,13 @@ input.search-form:hover {
 }
 
 #main-slider .carousel h2 {
-  color: #fff;
+	font-size: 36px;
+  	color: #fff;
+}
+
+#main-slider .carousel h3 {
+	font-size: 20px;
+  	color: #fff;
 }
 
 #main-slider .carousel .btn-slide {

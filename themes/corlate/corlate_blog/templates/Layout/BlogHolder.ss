@@ -1,6 +1,6 @@
 <section id="blog" class="container">
     <div class="center">
-        <h2>{$Title}</h2>
+        <h1>{$Title}</h1>
         <p class="lead">{$Content}</p>
     </div>
 

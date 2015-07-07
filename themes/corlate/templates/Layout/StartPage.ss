@@ -19,8 +19,8 @@
 	                    <div class="row slide-margin">
 	                        <div class="col-sm-6">
 	                            <div class="carousel-content">
-	                                <h1 class="animation animated-item-1">{$Title}</h1>
-	                                <h2 class="animation animated-item-2">{$Lead}</h2>
+	                                <h2 class="animation animated-item-1">{$Title}</h2>
+	                                <h3 class="animation animated-item-2">{$Lead}</h3>
 	                                <a class="btn-slide animation animated-item-3" href="{$Top.BaseURL}{$Link}">Weiter</a>
 	                            </div>
 	                        </div>
