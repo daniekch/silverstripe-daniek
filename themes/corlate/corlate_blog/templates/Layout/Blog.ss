@@ -16,12 +16,12 @@
 					<h3><% _t('BlogHolder_ss.VIEWINGPOSTEDBY', 'Viewing entries posted by') %> $SelectedAuthor</h3>
 				<% end_if %>
              
-            	<% if BlogEntries %>
-					<% loop BlogEntries %>
+             	<% if $PaginatedList.Exists %>
+					<% loop $PaginatedList %>
 						<% include BlogSummary %>
 					<% end_loop %>
 				<% else %>
-					<h2><% _t('BlogHolder_ss.NOENTRIES', 'There are no blog entries') %></h2>
+					<p><%t Blog.NoPosts 'There are no posts' %></p>
 				<% end_if %>
 				
                 <% include BlogPagination %>
