@@ -7,7 +7,7 @@ class CustomLoginForm extends MemberLoginForm
 	public function __construct($controller, $name, $fields = null, $actions = null, $checkCurrentUser = true) {
 
 		if($checkCurrentUser && Member::currentUser() && Member::logged_in_session_exists()) {
-			$controller->redirect(Controller::curr()->redirect(Director::baseURL()));
+			$controller->redirect(Director::baseURL());
 		}
 		else {
 			$label=singleton('Member')->fieldLabel(Member::config()->unique_identifier_field);
