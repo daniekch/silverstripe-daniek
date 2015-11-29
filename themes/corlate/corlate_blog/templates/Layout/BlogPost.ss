@@ -8,8 +8,8 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="blog-item">
-                	<% if $HeadImage %>
-						<% with $HeadImage %>
+                	<% if $FeaturedImage %>
+						<% with $FeaturedImage %>
 							<img class="img-responsive img-blog" src="{$URL}" width="100%" alt="{$Up.Title}" />
 						<% end_with %>
 					<% end_if %>
@@ -34,7 +34,8 @@
                     </div>
                 </div>
                 
-                $PageComments
+                $Form
+				$CommentsForm
                 
             </div>
 			

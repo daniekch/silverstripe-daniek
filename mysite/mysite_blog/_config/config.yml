@@ -1,3 +1,4 @@
-BlogEntry:
-  extensions:
-    - BlogEntryExtension
+BlogPost:
+ extensions:
+  - BlogPostExtension
+  - CommentsExtension
