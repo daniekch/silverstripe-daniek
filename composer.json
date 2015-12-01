@@ -1,0 +1,22 @@
+{
+	"name": "silverstripe/installer",
+	"description": "The SilverStripe Framework Installer",
+	"require": {
+		"php": ">=5.3.3",
+		"silverstripe/cms": "*",
+		"silverstripe/framework": "*",
+		"silverstripe/reports": "*",
+		"silverstripe/siteconfig": "*",
+		"silverstripe/blog": "*",
+		"silverstripe/comments": "*",
+		"silverstripe/widgets": "*"
+	},
+	"require-dev": {
+		"phpunit/PHPUnit": "~3.7"
+	},
+	"config": {
+		"process-timeout": 600
+	},
+	"prefer-stable": true,
+	"minimum-stability": "dev"
+}
