@@ -11,7 +11,7 @@ SSViewer:
   theme: 'corlate'
   
 Director:
- environment_type: 'dev'
+ environment_type: 'live'
 
 Page:
   extensions:
