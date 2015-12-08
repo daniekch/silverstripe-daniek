@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-sm-2 text-center">
             <div class="entry-meta">
                 <span id="publish_date">{$Date.DayOfMonth} {$Date.ShortMonth}</span>
-                <span><i class="fa fa-comment"></i> <a href="{$Link}#comments-holder" title="KOmmentare zu diesem Blog">{$Comments.Count} Kommentare</a></span>
+                <span><i class="fa fa-comment"></i> <a href="{$Link}#comments_title" title="KOmmentare zu diesem Blog">{$Comments.Count} Kommentare</a></span>
                	<% if TagsCollection %>
 					<span>
 						<i><% _t('BlogSummary_ss.TAGS','Tags') %></i> 
