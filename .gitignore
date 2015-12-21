@@ -49,20 +49,20 @@ Temporary Items
 .project
 
 # Silverstripe default installation
-assets
-cms
-framework
-vendor
-.htaccess
-CONTRIBUTING.md
-index.php
-Makefile
-web.config
-
-# Silverstripe custom config
-mysite/_config.php
+assets/*
+_ss_environment.php
+tools/phing-metadata
+silverstripe-cache
+.buildpath
+.project
+.settings
+.idea
+.DS_Store
+vendor/
 
 # Silverstripe module
+cms
+framework
 blog
 comments
 widgets
@@ -71,4 +71,6 @@ lumberjack
 reports
 siteconfig
 tagfield
-.editorconfig
+
+# Silverstripe custom config
+mysite/_config.php
