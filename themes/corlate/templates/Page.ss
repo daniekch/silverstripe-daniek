@@ -21,6 +21,11 @@
 	    <![endif]-->       
 	    <link rel="shortcut icon" href="{$ThemeDir}/images/ico/favicon.ico">
 	    
+	    <script src="{$ThemeDir}/js/jquery.js"></script>
+	    <script src="{$ThemeDir}/js/bootstrap.min.js"></script>
+	    <script src="{$ThemeDir}/js/jquery.prettyPhoto.js"></script>
+	    <script src="{$ThemeDir}/js/jquery.isotope.min.js"></script>
+	   	<script src="{$ThemeDir}/js/wow.min.js"></script>
 	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 	    
 	    <% include GoogleAnalytics %>
@@ -38,12 +43,7 @@
 		
 		<% include Footer %>
 		
-	    <script src="{$ThemeDir}/js/jquery.js"></script>
-	    <script src="{$ThemeDir}/js/bootstrap.min.js"></script>
-	    <script src="{$ThemeDir}/js/jquery.prettyPhoto.js"></script>
-	    <script src="{$ThemeDir}/js/jquery.isotope.min.js"></script>
 	    <script src="{$ThemeDir}/js/main.js"></script>
-	    <script src="{$ThemeDir}/js/wow.min.js"></script>
-	    
+
 	</body>
 </html>
