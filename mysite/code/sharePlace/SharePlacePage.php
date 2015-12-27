@@ -37,7 +37,7 @@ class SharePlacePage extends Page
 class SharePlacePage_Controller extends Page_Controller {
 	
 	private static $allowed_actions = array(
-		'getSharedPlaces'
+		'getsharedplaces'
 	);
 	
 	public function init() {
@@ -45,12 +45,24 @@ class SharePlacePage_Controller extends Page_Controller {
 	
 	}
 	
-	public function getSharedPlaces($limit = 10, $offset = 0)	{
+	public function getsharedplaces(SS_HTTPRequest $request)
+	{		
+		$limit = 1;
+		$offset = 0;
 		
-		$places = $this->SharePlace()->sort('Created', 'DESC')->limit($limit, $offset);
+		if($request->param('ID'))
+		{
+			$offset = $request->param('ID');
+		}
+		
+		$places = $this->SharePlace()->sort('Created', 'DESC');
+		$nextOffset = $offset + $limit;
+		$ShowMoreLink = $places->limit($limit, $nextOffset);
 		
 		$arrayData = new ArrayData(array(
-			'SharePlaces' => $places
+			'SharePlaces' 	=> $places->limit($limit, $offset),
+			'ShowMoreLink' 	=> $ShowMoreLink->Count() > 0,
+			'MoreLink'		=> $this->Link('getsharedplaces').'/'.$nextOffset
 		));
 		
 		return $this->renderWith("SharePlace", $arrayData);
