@@ -10,10 +10,16 @@ class SharePlacePage extends Page
 		"SharePlace" => "SharePlace"
 	);
 	
+	private static $defaults = array(
+		'Limit' => 10
+	);
+	
 	public function getCMSFields()
 	{
 		$fields = parent::getCMSFields();
-	
+		
+		$fields->addFieldToTab("Root.Configuration", new TextField('Limit', 'Anzahl Orte'));
+		
 		// contact message data relation management
 		$config = GridFieldConfig_RelationEditor::create();
 		$config->getComponentByType('GridFieldDataColumns')->setDisplayFields(array(
@@ -30,6 +36,8 @@ class SharePlacePage extends Page
 	
 		$fields->addFieldToTab('Root.Orte', $placeField);
 	
+		
+		
 		return $fields;
 	}
 }
@@ -47,7 +55,7 @@ class SharePlacePage_Controller extends Page_Controller {
 	
 	public function getsharedplaces(SS_HTTPRequest $request)
 	{		
-		$limit = 1;
+		$limit = $this->Limit;
 		$offset = 0;
 		
 		if($request->param('ID'))
