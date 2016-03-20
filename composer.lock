@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c5e18f4519d9593fea587ab985290e5e",
-    "content-hash": "5c9145b440975f386146816061736f6f",
+    "hash": "58788fc4411c484afa33f7b917cd046b",
+    "content-hash": "aafd7036cac28b5e9623ec00baf6b5d2",
     "packages": [
         {
             "name": "assertchris/hash-compat",
@@ -238,16 +238,16 @@
         },
         {
             "name": "silverstripe/cms",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-cms.git",
-                "reference": "a5444c3eeba6b6288b246e0e7e65594f2b98c18b"
+                "reference": "77d506547c8c8be6132c26d3125f9138e1eacfbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-cms/zipball/a5444c3eeba6b6288b246e0e7e65594f2b98c18b",
-                "reference": "a5444c3eeba6b6288b246e0e7e65594f2b98c18b",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-cms/zipball/77d506547c8c8be6132c26d3125f9138e1eacfbb",
+                "reference": "77d506547c8c8be6132c26d3125f9138e1eacfbb",
                 "shasum": ""
             },
             "require": {
@@ -288,7 +288,7 @@
                 "cms",
                 "silverstripe"
             ],
-            "time": "2016-02-24 03:06:03"
+            "time": "2016-02-29 02:01:55"
         },
         {
             "name": "silverstripe/comments",
@@ -341,16 +341,16 @@
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "0ec021dac89590fd103696737a1d65a3c543786e"
+                "reference": "fb582332010873c1ec03f5644263667f615b1f98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/0ec021dac89590fd103696737a1d65a3c543786e",
-                "reference": "0ec021dac89590fd103696737a1d65a3c543786e",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/fb582332010873c1ec03f5644263667f615b1f98",
+                "reference": "fb582332010873c1ec03f5644263667f615b1f98",
                 "shasum": ""
             },
             "require": {
@@ -391,7 +391,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2016-02-24 03:30:34"
+            "time": "2016-02-29 02:23:25"
         },
         {
             "name": "silverstripe/lumberjack",
