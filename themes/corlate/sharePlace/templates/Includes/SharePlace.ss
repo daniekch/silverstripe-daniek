@@ -39,8 +39,9 @@
 						</script>
 						    
 						<div id="map-canvas" style="height: 275px; margin: 0px; padding: 0px;"></div>
+					<% else_if $ShareType == 'Text' %>
+						{$Comments}
 					<% end_if %>
-					{$Comments}
 				</p>
 				<span class="cd-date">{$Created.Format("d.m.Y")}</span>
 			</div>

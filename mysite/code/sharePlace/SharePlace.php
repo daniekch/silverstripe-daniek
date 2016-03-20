@@ -5,7 +5,7 @@ class SharePlace extends DataObject
 	private static $db = array(
 		"Title"		=> "Varchar(200)",
 		"Comments"	=> "Text",
-		"ShareType"	=> "Enum('Picture,Location', 'Picture')",
+		"ShareType"	=> "Enum('Picture,Location,Text', 'Picture')",
 		'Lat' 		=> 'Varchar(20)',
 		'Lng' 		=> 'Varchar(20)'
 	);

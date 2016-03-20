@@ -8,6 +8,10 @@
     <form id="main-contact-form" class="contact-form" $FormAttributes>
     	<div class="row">
 	        <div class="col-sm-5">
+	        	<div class="form-group">
+	                <label>{$Fields.dataFieldByName(ShareType).Title}</label>
+	                {$Fields.dataFieldByName(ShareType)}
+	            </div>
 	            <div class="form-group">
 	                <label>{$Fields.dataFieldByName(Title).Title}</label>
 	                {$Fields.dataFieldByName(Title)}

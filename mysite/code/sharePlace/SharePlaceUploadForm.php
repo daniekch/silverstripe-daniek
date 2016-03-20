@@ -4,6 +4,9 @@ class SharePlaceUploadForm extends Form {
 
 	public function __construct($controller, $name) {
 
+		$typeField = new DropdownField('ShareType', 'Posttyp', singleton('SharePlace')->dbObject('ShareType')->enumValues());
+		$typeField->addExtraClass('form-control');
+		
 		$titleField = new TextField('Title', 'Titel');
 		$titleField->addExtraClass('form-control');
 		
@@ -21,6 +24,7 @@ class SharePlaceUploadForm extends Form {
 		$lngField = new HiddenField('Lng');
 
 		$fields = new FieldList(
+							$typeField,
 							$titleField,
 							$pictureField,
 							$commentsField,
@@ -44,15 +48,6 @@ class SharePlaceUploadForm extends Form {
 	public function SendSharePlaceUploadForm(array $data, Form $form) {
 
 		$sharePlace = new SharePlace();
-		
-		if(!empty($data['Picture']['tmp_name']))
-		{
-			$sharePlace->ShareType = 'Picture';
-		}
-		else if (!empty($data['Lat']) && !empty($data['Lng']))
-		{
-			$sharePlace->ShareType = 'Location';
-		}
 		
 		$form->saveInto($sharePlace);
 		$sharePlace->SharePlacePageID = Controller::curr()->ID;
