@@ -14,6 +14,7 @@
 	    <link href="{$ThemeDir}/css/animate.min.css" rel="stylesheet">
 	    <link href="{$ThemeDir}/css/prettyPhoto.css" rel="stylesheet">
 	    <link href="{$ThemeDir}/css/main.css" rel="stylesheet">
+	    <link href="{$ThemeDir}/css/custom.css" rel="stylesheet">
 	    <link href="{$ThemeDir}/css/responsive.css" rel="stylesheet">
 	    <!--[if lt IE 9]>
 	    <script src="{$ThemeDir}/js/html5shiv.js"></script>
@@ -26,7 +27,7 @@
 	    <script src="{$ThemeDir}/js/jquery.prettyPhoto.js"></script>
 	    <script src="{$ThemeDir}/js/jquery.isotope.min.js"></script>
 	   	<script src="{$ThemeDir}/js/wow.min.js"></script>
-	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 	    
 	    <% include GoogleAnalytics %>
 		
