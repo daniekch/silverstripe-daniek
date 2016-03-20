@@ -14,7 +14,9 @@
 				<% if $Title %><h2>{$Title}</h2><% end_if %>
 				<p>
 					<% if $ShareType == 'Picture' %>
-						{$Picture.SetWidth(480)}
+						<% with $Picture %>
+							<img class="img-responsive img-blog" src="{$URL}" width="100%" alt="{$Up.Title}" />
+						<% end_with %>
 					<% else_if $ShareType == 'Location' %>
 						<script>
 							function initialize() {

@@ -3,11 +3,12 @@
 class SharePlacePage extends Page
 {
 	private static $db = array(
-		"Limit"		=> "Int"
+		'Limit'		=> 'Int',
+		'Mailto' => 'Varchar(100)'
 	);
 	
 	private static $has_many = array(
-		"SharePlace" => "SharePlace"
+		'SharePlace' => 'SharePlace'
 	);
 	
 	private static $defaults = array(
@@ -19,6 +20,7 @@ class SharePlacePage extends Page
 		$fields = parent::getCMSFields();
 		
 		$fields->addFieldToTab("Root.Configuration", new TextField('Limit', 'Anzahl Orte'));
+		$fields->addFieldToTab("Root.Configuration", new TextField('Mailto', 'E-Mail bei neuen Posts'));
 		
 		// contact message data relation management
 		$config = GridFieldConfig_RelationEditor::create();
@@ -45,12 +47,23 @@ class SharePlacePage extends Page
 class SharePlacePage_Controller extends Page_Controller {
 	
 	private static $allowed_actions = array(
-		'getsharedplaces'
+		'getsharedplaces',
+		'SharePlaceUploadForm'
 	);
 	
 	public function init() {
 		parent::init();
 	
+	}
+	
+	public function ShowUploadForm()
+	{
+		return $this->request->getVar('form') && $this->request->getVar('form') == 'upload';
+	}
+	
+	public function SharePlaceUploadForm()
+	{
+		return new SharePlaceUploadForm($this, 'SharePlaceUploadForm');
 	}
 	
 	public function getsharedplaces(SS_HTTPRequest $request)
