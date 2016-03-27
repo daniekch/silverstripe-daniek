@@ -22,6 +22,8 @@ class SharePlaceUploadForm extends Form {
 		
 		$latField = new HiddenField('Lat');
 		$lngField = new HiddenField('Lng');
+		$nearBy = new HiddenField('NearBy');
+		$nearByIcon = new HiddenField('NearByIcon');
 
 		$fields = new FieldList(
 							$typeField,
@@ -29,7 +31,9 @@ class SharePlaceUploadForm extends Form {
 							$pictureField,
 							$commentsField,
 							$latField,
-							$lngField
+							$lngField,
+							$nearBy,
+							$nearByIcon
 						);
 
 		$actionButton = new FormAction('SendSharePlaceUploadForm', 'Posten', $this);

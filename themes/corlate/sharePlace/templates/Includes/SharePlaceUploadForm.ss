@@ -1,4 +1,4 @@
-<div class="row contact-wrap" style="display: none;" id="uploadForm">
+<div class="container contact-wrap" style="display: none;" id="uploadForm">
 	<% if $Message %>
 	    <div id="{$FormName}_error" class="status alert alert-success">{$Message}</div>
 	<% else %>
@@ -26,44 +26,19 @@
 	            </div>
 	            {$Fields.dataFieldByName(Lat)}
 	            {$Fields.dataFieldByName(Lng)}
+	            {$Fields.dataFieldByName(NearBy)}
+	            {$Fields.dataFieldByName(NearByIcon)}
 	            {$Fields.dataFieldByName(SecurityID)}                     
 	            <div class="form-group">
 	            	<% loop $Actions %>$Field<% end_loop %>
 	            </div>
 	        </div>
         </div>
+        <div id="temp-map"></div>
         <script type="text/javascript">
-	        if (navigator.geolocation) {
-	            navigator.geolocation.getCurrentPosition(showPosition);
-	        } else {
-	            
-	        }
-	        
-	        function showPosition(position) {
-	        	$('#SharePlaceUploadForm_SharePlaceUploadForm_Lat').val(position.coords.latitude);
-	        	$('#SharePlaceUploadForm_SharePlaceUploadForm_Lng').val(position.coords.longitude);
-	        	
-	        	var pyrmont = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-	        	
-	        	var request = {
-	       		    location: pyrmont,
-	       		    radius: '500',
-	       		    types: ['locality']
-	       		};
-	        	
-	        	service = new google.maps.places.PlacesService(map);
-	        	service.nearbySearch(request, callback);
-	        }
-	        
-	        function callback(results, status) {
-	        	  if (status == google.maps.places.PlacesServiceStatus.OK) {
-	        	    for (var i = 0; i < results.length; i++) {
-	        	      var place = results[i];
-	        	      alert(results[i]);
-	        	    }
-	        	  }
-	        	}
-	        
+        	jQuery(document).ready(function($){
+        		setGeoLocation();
+        	});
         </script>
     </form> 
 </div>

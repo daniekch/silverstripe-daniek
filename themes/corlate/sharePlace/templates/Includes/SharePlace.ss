@@ -42,6 +42,10 @@
 					<% else_if $ShareType == 'Text' %>
 						{$Comments}
 					<% end_if %>
+					
+					<% if $NearBy %>
+						<a href="" class="nearby">{$NearBy}</a>
+					<% end_if %>
 				</p>
 				<span class="cd-date">{$Created.Format("d.m.Y")}</span>
 			</div>

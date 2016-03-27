@@ -7,7 +7,9 @@ class SharePlace extends DataObject
 		"Comments"	=> "Text",
 		"ShareType"	=> "Enum('Picture,Location,Text', 'Picture')",
 		'Lat' 		=> 'Varchar(20)',
-		'Lng' 		=> 'Varchar(20)'
+		'Lng' 		=> 'Varchar(20)',
+		'NearBy'	=> 'Varchar(200)',
+		'NearBy_Icon' => 'Varchar(200)'
 	);
 	
 	private static $has_one = array(
