@@ -2,3 +2,5 @@ BlogPost:
  extensions:
   - BlogPostExtension
   - CommentsExtension
+ comments:
+  require_moderation: true
