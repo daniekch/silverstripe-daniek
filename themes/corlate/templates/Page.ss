@@ -27,7 +27,7 @@
 	    <script src="{$ThemeDir}/js/jquery.prettyPhoto.js"></script>
 	    <script src="{$ThemeDir}/js/jquery.isotope.min.js"></script>
 	   	<script src="{$ThemeDir}/js/wow.min.js"></script>
-	    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcnMB1og1wojVokC1iG3nJBnLBcDwgbgE&libraries=places"></script>
 	    
 	    <% include GoogleAnalytics %>
 		
