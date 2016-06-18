@@ -3,6 +3,13 @@ jQuery(document).ready(function($){
 	$("#btnNewPost").click(function() {
 	  $("#uploadForm").fadeToggle("slow");
 	});
+	
+	// Set visibility of dependent fields from sharetype dropdown.
+	toggleSharePlaceFormFields();
+	$("#SharePlaceUploadForm_SharePlaceUploadForm_ShareType").change(function () {
+		toggleSharePlaceFormFields();
+    });
+	
 });
 
 function initShareplaces(relativUrl) {
@@ -50,3 +57,21 @@ function callbackNearbySearch(results, status) {
     }
   }
 }
+
+function toggleSharePlaceFormFields() {
+	
+	$("#pictureField").hide();
+	$("#commentsField").hide();
+	
+    if ($("#SharePlaceUploadForm_SharePlaceUploadForm_ShareType").val() == "Picture") {
+    	$("#pictureField").show();
+    }
+    else if($("#SharePlaceUploadForm_SharePlaceUploadForm_ShareType").val() == "Text") {
+    	$("#commentsField").show();
+    }
+    else if($("#SharePlaceUploadForm_SharePlaceUploadForm_ShareType").val() == "Location") {
+    	
+    }
+}
+        
+ 

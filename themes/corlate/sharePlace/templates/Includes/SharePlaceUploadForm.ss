@@ -8,19 +8,19 @@
     <form id="main-contact-form" class="contact-form" $FormAttributes>
     	<div class="row">
 	        <div class="col-sm-5">
-	        	<div class="form-group">
+	        	<div class="form-group" id="sharetypeField">
 	                <label>{$Fields.dataFieldByName(ShareType).Title}</label>
 	                {$Fields.dataFieldByName(ShareType)}
 	            </div>
-	            <div class="form-group">
+	            <div class="form-group" id="titleField">
 	                <label>{$Fields.dataFieldByName(Title).Title}</label>
 	                {$Fields.dataFieldByName(Title)}
 	            </div>
-	            <div class="form-group">
+	            <div class="form-group" id="pictureField">
 	                <label>{$Fields.dataFieldByName(Picture).Title}</label>
 	                {$Fields.dataFieldByName(Picture)}
 	            </div>
-	            <div class="form-group">
+	            <div class="form-group" id="commentsField">
 	                <label>{$Fields.dataFieldByName(Comments).Title}</label>
 	                {$Fields.dataFieldByName(Comments)}
 	            </div>
