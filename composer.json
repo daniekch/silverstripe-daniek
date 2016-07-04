@@ -3,10 +3,10 @@
 	"description": "The SilverStripe Framework Installer",
 	"require": {
 		"php": ">=5.3.3",
-		"silverstripe/cms": "3.3.1",
-		"silverstripe/framework": "3.3.1",
-		"silverstripe/blog": "2.4.0",
-		"silverstripe/comments": "2.0.3",
+		"silverstripe/cms": "3.4",
+		"silverstripe/framework": "3.4",
+		"silverstripe/blog": "2.4.2",
+		"silverstripe/comments": "2.1.1",
 		"silverstripe/widgets": "1.2.2"
 	},
 	"require-dev": {
