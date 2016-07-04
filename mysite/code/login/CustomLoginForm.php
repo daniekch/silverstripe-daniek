@@ -2,8 +2,6 @@
 
 class CustomLoginForm extends MemberLoginForm 
 {
-	protected $template = 'CustomLoginForm';
-	
 	public function __construct($controller, $name, $fields = null, $actions = null, $checkCurrentUser = true) {
 
 		if($checkCurrentUser && Member::currentUser() && Member::logged_in_session_exists()) {
