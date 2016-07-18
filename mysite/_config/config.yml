@@ -12,6 +12,8 @@ SSViewer:
   
 Director:
  environment_type: 'dev'
+ rules:
+  'healthImport//$Action/$ID/$Name': 'HealthImport_Controller'
 
 Page:
   extensions:
