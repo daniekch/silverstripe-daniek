@@ -18,17 +18,22 @@ class HealthImport_Controller extends Controller {
     }
 
     public function Form() {
-        return new Form(
-            $this,
-            'Form',
-            new FieldList(
-                new FileField('XMLFile', "File")
-            ),
-            new FieldList(
-                new FormAction('doSubmitForm', 'Upload')
-            ),
-            new RequiredFields('XMLFile')
-        );
+    	
+    	if(!Permission::check("ADMIN")) {
+    		$this->redirect(Director::baseURL() . 'Security/login?BackURL=' . urlencode(Director::baseURL() . 'healthImport'));
+    	}
+    	
+    	return new Form(
+    			$this,
+    			'Form',
+    			new FieldList(
+    					new FileField('XMLFile', "File")
+    					),
+    			new FieldList(
+    					new FormAction('doSubmitForm', 'Upload')
+    					),
+    			new RequiredFields('XMLFile')
+    			);
     }
 
     public function doSubmitForm($data, $form) {
