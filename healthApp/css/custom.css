@@ -1,0 +1,18 @@
+#healtSearchform {
+	margin: 20px;
+}
+
+#health-profil .form-group label {
+  color: #4E4E4E;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+#Form_ZIPImportForm_ZIPFile_Holder input[type="file"] {
+    display: inline;
+}
+
+.get-started {
+	margin-top: 0;
+	margin-bottom: 80px;
+}
