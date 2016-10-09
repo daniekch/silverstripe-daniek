@@ -95,6 +95,8 @@ class HealthOverviewPage_Controller extends Page_Controller {
 	
 	public function doZIPImport($data, $form) {
 		
+		ini_set('memory_limit', '512M');
+		
 		try {
 			$content = HealthImporter::readZIP($data['ZIPFile']['tmp_name']);
 			
@@ -123,7 +125,7 @@ class HealthOverviewPage_Controller extends Page_Controller {
 			}
 		}
 		catch(Exception $e) {
-			$form->AddErrorMessage('ZIPFile', $e->errorMessage(), 'bad');
+			$form->AddErrorMessage('ZIPFile', $e->getMessage(), 'bad');
 		}
 
 		return $this->redirectBack();
