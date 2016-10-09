@@ -1,4 +1,4 @@
-<% require css("themes/corlate/healthAnalyser/css/custom.css") %>
+<% require css("healthApp/css/custom.css") %>
 
 <section id="feature" class="transparent-bg">
     <div class="container">
@@ -67,24 +67,24 @@
         </div>
     
    		<div class="row">
-               <div class="col-md-4 wow fadeInDown">
-                   <div class="clients-comments text-center">
-                       <img src="handy.jpg" class="img-circle" alt="">
-                       <h3>Die Health-App ist auf jedem iPhone ab Version iOS 9 vorinstalliert.</h3>
-                   </div>
-               </div>
-               <div class="col-md-4 wow fadeInDown">
-                   <div class="clients-comments text-center">
-                       <img src="healthapp.jpg" class="img-circle" alt="">
-                       <h3>Die Health-App ist die Nutzeroberfl&auml;che f&uuml;r Apples Gesundheits- und Fitness-Datenverwaltung HealthKit.</h3>
-                   </div>
-               </div>
-               <div class="col-md-4 wow fadeInDown">
-                   <div class="clients-comments text-center">
-                       <img src="health_screenshot.png" class="img-circle" alt="">
-                       <h3>Apple bietet eine visualisierung der Daten innerhalb der App und l&auml;sst andere App bei Nutzerzustimmung auf die Daten zugriefen.</h3>
-                   </div>
-               </div>
-          </div>
+	         <div class="col-md-4 wow fadeInDown">
+	             <div class="clients-comments text-center">
+	                 <img src="healthApp/images/handy.jpg" class="img-circle" alt="">
+	                 <h3>Die Health-App ist auf jedem iPhone ab Version iOS 9 vorinstalliert.</h3>
+	             </div>
+	         </div>
+	         <div class="col-md-4 wow fadeInDown">
+	             <div class="clients-comments text-center">
+	                 <img src="healthApp/images/healthapp.jpg" class="img-circle" alt="">
+	                 <h3>Die Health-App ist die Nutzeroberfl&auml;che f&uuml;r Apples Gesundheits- und Fitness-Datenverwaltung HealthKit.</h3>
+	             </div>
+	         </div>
+	         <div class="col-md-4 wow fadeInDown">
+	             <div class="clients-comments text-center">
+	                 <img src="healthApp/images/health_screenshot.png" class="img-circle" alt="">
+	                 <h3>Apple bietet eine visualisierung der Daten innerhalb der App und l&auml;sst andere App bei Nutzerzustimmung auf die Daten zugriefen.</h3>
+	             </div>
+	         </div>
+	    </div>
     </div>
 </section>
