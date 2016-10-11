@@ -70,6 +70,10 @@ class HealthOverviewPage_Controller extends Page_Controller {
 
 	}
 	
+	/**
+	 * Generate form for converter
+	 * @return Form
+	 */
 	public function ZIPImportForm() {
 	
 		$ffXML = new FileField('ZIPFile', '');
@@ -93,25 +97,24 @@ class HealthOverviewPage_Controller extends Page_Controller {
 		return $form;
 	}
 	
+	/**
+	 * Action methode from converter form
+	 * 
+	 * @param object $data
+	 * @param object $form
+	 * @throws Exception
+	 * @return SS_HTTPResponse|boolean|SS_HTTPResponse
+	 */
 	public function doZIPImport($data, $form) {
-		
-		ini_set('memory_limit', '512M');
 		
 		try {
 			$content = HealthImporter::readZIP($data['ZIPFile']['tmp_name']);
 			
 			if($content != null) {
 				
-				$healthData = new SimpleXMLElement($content);
-		
-				$healthDataList = new ArrayList();
-		
-				foreach ($healthData->Record as $record) {
-		
-					$healthDataList->add(HealthImporter::CreateHealthDataObject($record));
-				}
+				$xmlData = new SimpleXMLElement($content);
 					
-				$csvFile = HealthImporter::CreateCSVFile($healthDataList);
+				$csvFile = HealthImporter::CreateCSVFile($xmlData);
 				$metaDatas = stream_get_meta_data($csvFile);
 				
 				$response = new SS_HTTPResponse();

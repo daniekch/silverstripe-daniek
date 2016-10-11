@@ -11,7 +11,7 @@ class CleanUpTask extends BuildTask  {
 		increase_time_limit_to(3600);
 		increase_memory_limit_to('512M');
 		
-		$result = HealthImporter::CleanUpHealthData();
+		$result = HealthImporter::MergeHealthData();
 			
 		exit('Anzahl gespeicherte Daten: '.$result['Saved'].' Anzahl geloeschte Daten: '.$result['Deleted']);
 	}

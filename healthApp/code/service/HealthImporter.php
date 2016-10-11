@@ -9,127 +9,11 @@ class HealthImporter {
     const XML_DISTANCEWALKINGRUNNING_TYPE = "HKQuantityTypeIdentifierDistanceWalkingRunning";
     const XML_FLIGHTSCLIMBED_TYPE = "HKQuantityTypeIdentifierFlightsClimbed";
     
-    public function Link($action = null) {
-        return Controller::join_links('healthImport', $action);
-    }
-    
     /**
-     * Save healtdata Object and return id
-     * @param unknown $healthDate
+     * Merge some types of data in only one record.
+     * @return number[]
      */
-    public static function SaveHealthData($healthDataList) {
-    	
-    	foreach ($healthDataList as $healthData) {
-    		
-    		if($healthData->isInDB()) {
-    			
-    			if($healthData->updateChanges()) {
-    				//$healthData->write();
-    			}
-    		}
-    		else {
-    			//$healthDate->write();
-    		}
-    		
-    		$healthDate->flushCache();
-    		$healthDate->destroy();
-    		
-    	}
-    	
-    	return $healthDataList->getIDList();
-    }
-    
-    /**
-     * Get healthData from exist db record or create a new
-     * @param string $class_name
-     * @param array $XMLcomponent
-     * @param DateTime $low
-     * @param DateTime $high
-     */
-    public static function GetHealtDataObject($record, $healthDataList) {
-    	
-    	$type = (string) $record['type'];
-    	$startDate = new DateTime($record['startDate']);
-    	$endDate = new DateTime($record['endDate']);
-    	
-    	if(	$type == HealthImporter::XML_DISTANCEWALKINGRUNNING_TYPE ||
-    		$type == HealthImporter::XML_HEARTRATE_TYPE ||
-    		$type == HealthImporter::XML_STEPCOUNT_TYPE) {
-    			
-    		$filter = array(
-    			'Type'							=> $type,
-    			'StartDate:GreaterThanOrEqual' 	=> $startDate->format('Y-m-d').'T00:00:00+00:00',
-    			'EndDate:LessThanOrEqual' 		=> $endDate->format('Y-m-d').'T23:59:59+00:00',
-    			'MemberID'						=> Member::currentUserID()
-   			);
-    		
-    		$healthData = Health_Data::get()->filter($filter);
-    		
-    		if($healthData == null || !$healthData->exists()){
-    			
-    			$healthData = $healthDataList->filter($filter);
-    		}
-    	}
-    	else {
-    		$healthData = Health_Data::get()->filter(array(
-    				'StartDate' => $startDate->format('Y-m-d H:i:s'),
-    				'EndDate' 	=> $endDate->format('Y-m-d H:i:s'),
-    				'MemberID'	=> Member::currentUserID()
-    		));
-    	}
-    	
-    	if($healthData != null && $healthData->exists()) {
-    		
-    		return $healthData->first();
-    	}
-    	
-    	return new Health_Data();
-    }
-    
-    /**
-     * Create a new HealthData Object.
-     * @param string $class_name Classname for healthData Type
-     * @return HeartRate
-     */
-    public static function CreateHealthDataObject($record) {
-    	
-    	$healthData = new Health_Data();
-    	
-    	$startDate = new DateTime($record['startDate']);
-    	$endDate = new DateTime($record['endDate']);
-    	
-    	$healthData->Type = (string) $record['type'];
-    	$healthData->Value = floatval($record['value']);
-    	$healthData->StartDate = $startDate->format('Y-m-d H:i:s');
-    	$healthData->EndDate = $endDate->format('Y-m-d H:i:s');
-    	$healthData->MemberID = Member::currentUserID();
-    	
-    	return $healthData;
-    }
-    
-    /**
-     * Delete all heartRates it was not in import
-     * @param array $healthDataWrited
-     * @return boolean
-     */
-    public static function DeleteHealthData($healthDataWrited) {
-    	
-    	$healthData = null;
-    	
-    	foreach($healthDataWrited as $id) {
-    		
-    		$healthData = Health_Data::get()->filter(array('MemberID' => Member::currentUserID()));
-	    	
-    		foreach($healthData as $item) {
-    		
-    			if(!in_array($item->ID, $id)) {
-    				$item->delete();
-    			}
-    		}
-    	}
-    }
-    
-    public static function CleanUpHealthData() {
+    public static function MergeHealthData() {
     	
     	$healthDataList = Health_Data::get()->filter(array('Adjusted' => 0));
     	
@@ -210,32 +94,73 @@ class HealthImporter {
 		return $result;
     }
     
-    public static function CreateCSVFile($healthDataList, $import = false) {
+    /**
+     * Create a CSV file for converter app
+     * 
+     * @param SimpleXMLData $xmlData
+     * @return CSV File
+     */
+    public static function CreateCSVFile($xmlData) {
     	
-    	$file = tmpfile();
-    	
-    	$titleRow = array('Type', 'Value', 'StartDate', 'EndDate');
-    	if($import == true) {
-    		array_push($titleRow, 'MemberID');
-    	}
-    	
+        $file = tmpfile();
+    	 
+    	$titleRow = array('type', 'sourceName', 'sourceVersion', 'unit', 'creationDate', 'startDate', 'endDate', 'value');
+    	 
     	fputcsv($file, $titleRow, ';');
-    	
-    	foreach ($healthDataList as $healthData)
+    	 
+    	foreach ($xmlData->Record as $record)
     	{
-    		$row = array($healthData->Type, $healthData->Value, $healthData->StartDate, $healthData->EndDate);
-    		if($import == true) {
-    			array_push($row, $healthData->MemberID);
-    		}
-    		
+    		$row = array(
+    				$record['type'],
+    				$record['sourceName'],
+    				$record['sourceVersion'],
+    				$record['unit'],
+    				$record['creationDate'],
+    				$record['startDate'],
+    				$record['endDate'],
+    				$record['value']
+    			);
+    
     		fputcsv($file, $row, ';');
     	}
-    	
+    	 
     	fseek($file, 0);
-    	
+    	 
     	return $file;
     }
     
+    /**
+     * Create a CSV for fast import in sql.
+     * 
+     * @param SimpleXMLData $xmlData
+     * @return CSV file
+     */
+    public static function CreateCSVFileForImport($xmlData) {
+    	 
+    	$file = tmpfile();
+    	 
+    	$titleRow = array('Type', 'Value', 'StartDate', 'EndDate', 'MemberID');
+    	 
+    	fputcsv($file, $titleRow, ';');
+    	 
+    	foreach ($xmlData->Record as $record)
+    	{
+    		$row = array($record['type'], $healthData->Value, $healthData->StartDate, $healthData->EndDate, $healthData->MemberID);
+    
+    		fputcsv($file, $row, ';');
+    	}
+    	 
+    	fseek($file, 0);
+    	 
+    	return $file;
+    }
+    
+    /**
+     * Execute the load data query on sql db.
+     * 
+     * @param File $csvFile
+     * @return boolean
+     */
     public static function LoadDataInFile($csvFile) {
     	
     	try {
@@ -250,6 +175,12 @@ class HealthImporter {
     	}
     }
     
+    /**
+     * Unzip the apple export file
+     * 
+     * @param string $zipName
+     * @return File or NULL
+     */
     public static function readZIP($zipName) {
     	
     	$za = new ZipArchive();

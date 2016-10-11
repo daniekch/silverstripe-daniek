@@ -215,16 +215,10 @@ class HealthAnalyserProfilPage_Controller extends Page_Controller {
 		
 		if($content != null) {
 			
-			$healthData = new SimpleXMLElement($content);
-	
-			$healthDataList = new ArrayList();
-	
-			foreach ($healthData->Record as $record) {
-				
-				$healthDataList->add(HealthImporter::CreateHealthDataObject($record));
-			}
+			$xmlData = new SimpleXMLElement($content);
 			
-			$csvFile = HealthImporter::CreateCSVFile($healthDataList, true);
+			$csvFile = HealthImporter::CreateCSVFile($xmlData);
+			
 			HealthImporter::LoadDataInFile($csvFile);
 		}
 		else {
