@@ -10,7 +10,7 @@
 		<% end_if %>
 	    
 		<% if $Children %>
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$MenuTitle.XML} <i class="fa fa-angle-down"></i></a>
+			<a href="{$Link}" class="dropdown-toggle" data-toggle="dropdown">{$MenuTitle.XML} <i class="fa fa-angle-down"></i></a>
 		    <ul class="dropdown-menu">
 		      <% loop $Children %>
 		        <li class="$LinkingMode">
