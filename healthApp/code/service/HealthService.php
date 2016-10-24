@@ -1,19 +1,25 @@
 <?php
-class HealthImporter {
+class HealthService {
     
-	const XML_BODYMASS_TYPE = "HKQuantityTypeIdentifierBodyMass";
-    const XML_HEARTRATE_TYPE = "HKQuantityTypeIdentifierHeartRate";
-    const XML_BPSYSTOLIC_TYPE = "HKQuantityTypeIdentifierBloodPressureSystolic";
-    const XML_BPDIASTOLIC_TYPE = "HKQuantityTypeIdentifierBloodPressureDiastolic";
-    const XML_STEPCOUNT_TYPE = "HKQuantityTypeIdentifierStepCount";
-    const XML_DISTANCEWALKINGRUNNING_TYPE = "HKQuantityTypeIdentifierDistanceWalkingRunning";
-    const XML_FLIGHTSCLIMBED_TYPE = "HKQuantityTypeIdentifierFlightsClimbed";
+	private $config;
+	public $repository;
+    
+    function __construct() {
+    	$this->config = Config::inst();
+    }
+    
+    /**
+     * Dependencies Class for HealthService.
+     */
+    static $dependencies = array(
+    	'repository'    => '%$Repository'
+    );
     
     /**
      * Merge some types of data in only one record.
      * @return number[]
      */
-    public static function MergeHealthData() {
+    public function MergeHealthData() {
     	
     	$healthDataList = Health_Data::get()->filter(array('Adjusted' => 0));
     	
@@ -30,14 +36,14 @@ class HealthImporter {
 			$startDate = new DateTime($healthDataObject->StartDate);
 			$endDate = new DateTime($healthDataObject->EndDate);
 				
-		   	if($healthDataObject->Type == HealthImporter::XML_STEPCOUNT_TYPE) {
-		   		$type = HealthImporter::XML_STEPCOUNT_TYPE;
+		   	if($healthDataObject->Type == $this->config->get('Health_Data', 'xml_stepcount_type')) {
+		   		$type = $this->config->get('Health_Data', 'xml_stepcount_type');
 		   	}
-		   	else if ($healthDataObject->Type == HealthImporter::XML_DISTANCEWALKINGRUNNING_TYPE) {
-		   		$type = HealthImporter::XML_DISTANCEWALKINGRUNNING_TYPE;
+		   	else if ($healthDataObject->Type == $this->config->get('Health_Data', 'xml_distance_type')) {
+		   		$type = $this->config->get('Health_Data', 'xml_distance_type');
 		   	}
-		   	else if ($healthDataObject->Type == HealthImporter::XML_FLIGHTSCLIMBED_TYPE) {
-		   		$type = HealthImporter::XML_FLIGHTSCLIMBED_TYPE;
+		   	else if ($healthDataObject->Type == $this->config->get('Health_Data', 'xml_climbed_type')) {
+		   		$type = $this->config->get('Health_Data', 'xml_climbed_type');
 		   	}
 		   	else {
 		   		$toAdjusted->push($healthDataObject);
@@ -100,7 +106,7 @@ class HealthImporter {
      * @param SimpleXMLData $xmlData
      * @return CSV File
      */
-    public static function CreateCSVFile($xmlData) {
+    public function CreateCSVFile($xmlData) {
     	
         $file = tmpfile();
     	 
@@ -110,14 +116,18 @@ class HealthImporter {
     	 
     	foreach ($xmlData->Record as $record)
     	{
+    		$startDate = new DateTime($record['startDate']);
+    		$endDate = new DateTime($record['endDate']);
+    		$creationDate = new DateTime($record['creationDate']);
+    		
     		$row = array(
     				$record['type'],
     				$record['sourceName'],
     				$record['sourceVersion'],
     				$record['unit'],
-    				$record['creationDate'],
-    				$record['startDate'],
-    				$record['endDate'],
+    				$creationDate->format('Y-m-d H:i:s'),
+    				$startDate->format('Y-m-d H:i:s'),
+    				$endDate->format('Y-m-d H:i:s'),
     				$record['value']
     			);
     
@@ -135,7 +145,7 @@ class HealthImporter {
      * @param SimpleXMLData $xmlData
      * @return CSV file
      */
-    public static function CreateCSVFileForImport($xmlData) {
+    public function CreateCSVFileForImport($xmlData) {
     	 
     	$file = tmpfile();
     	 
@@ -145,7 +155,10 @@ class HealthImporter {
     	 
     	foreach ($xmlData->Record as $record)
     	{
-    		$row = array($record['type'], $healthData->Value, $healthData->StartDate, $healthData->EndDate, $healthData->MemberID);
+    		$startDate = new DateTime($record['startDate']);
+    		$endDate = new DateTime($record['endDate']);
+    		
+    		$row = array($record['type'], $record['value'], $startDate->format('Y-m-d H:i:s'), $endDate->format('Y-m-d H:i:s'), Member::currentUserID());
     
     		fputcsv($file, $row, ';');
     	}
@@ -161,18 +174,10 @@ class HealthImporter {
      * @param File $csvFile
      * @return boolean
      */
-    public static function LoadDataInFile($csvFile) {
+    public function LoadDataInFile($csvFile) {
     	
-    	try {
-    		$metaDatas = stream_get_meta_data($csvFile);
-    		DB::query("DELETE FROM health_data WHERE MemberID = ".Member::currentUserID());
-    		DB::query("LOAD DATA LOCAL INFILE '".addslashes($metaDatas['uri'])."' REPLACE INTO TABLE health_data FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES (Type, Value, StartDate, EndDate, MemberID) SET LastEdited = NOW(), Created = NOW()");
-    	
-    		return true;
-    	} catch (Exception $e) {
-    		
-    		return false;
-    	}
+    	$metaDatas = stream_get_meta_data($csvFile);
+    	return self::$repository->InsertDataFromFile($metaDatas['uri']);
     }
     
     /**
@@ -181,7 +186,7 @@ class HealthImporter {
      * @param string $zipName
      * @return File or NULL
      */
-    public static function readZIP($zipName) {
+    public function readZIP($zipName) {
     	
     	$za = new ZipArchive();
     			

@@ -24,6 +24,7 @@
 	    				<h2>Registration</h2>
 	    				<p>Bitte registrieren sie sich mit dem Formular.</p>
 		    			$RegisterForm
+		    			zur&uuml;ck zum <a href="{$Link}" title="zur&uuml;ck zum Login">Login</a>
 		    		<% else %>
 		    			<h2>Login</h2>
 		    			<p>Bitte loggen sie sich mit ihrem Account ein.</p>
@@ -42,16 +43,32 @@
 		    				<th>Anzahl</th>
 		    			</tr>
 		    			<tr>
+		    				<td>Schritte</td>
+		    				<td>$StepsCount</td>
+		    			</tr>
+		    			<tr>
+		    				<td>Distanz</td>
+		    				<td>$DistanceCount</td>
+		    			</tr>
+		    			<tr>
+		    				<td>H&ouml;he</td>
+		    				<td>$ClimbingCount</td>
+		    			</tr>
+		    			<tr>
 		    				<td>Gewicht</td>
 		    				<td>$WeightCount</td>
 		    			</tr>
 		    			<tr>
-		    				<td>Blutdruck</td>
-		    				<td>$BloodPresureCount</td>
-		    			</tr>
-		    			<tr>
 		    				<td>Puls</td>
 		    				<td>$HearthRateCount</td>
+		    			</tr>
+		    			<tr>
+		    				<td>Blutdruck (Systolic)</td>
+		    				<td>$BPSystolicCount</td>
+		    			</tr>
+		    			<tr>
+		    				<td>Blutdruck (Diastolic)</td>
+		    				<td>$BPDiastolicCount</td>
 		    			</tr>
 		    		</table>
 		    		<h2>Health Daten Import</h2>

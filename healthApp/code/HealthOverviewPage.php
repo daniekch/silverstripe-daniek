@@ -133,4 +133,22 @@ class HealthOverviewPage_Controller extends Page_Controller {
 
 		return $this->redirectBack();
 	}
+	
+	/**
+	 * Generate Link to Subpage where type HelthAnalysPage
+	 * @return Link or NULL
+	 */
+	public function LinkToHealthAnalyser() {
+		
+		if($children = $this->Children()) {
+			
+			$page = $children->filterByCallback(function ($item, $list) { return $item->getClassName() == 'HealthAnalyserPage';});
+			
+			if ($page->exists()) {
+				return $page->first()->Link();
+			}
+		}
+		
+		return null;
+	}
 }

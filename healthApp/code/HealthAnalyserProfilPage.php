@@ -6,7 +6,14 @@ class HealthAnalyserProfilPage extends Page {
 
 class HealthAnalyserProfilPage_Controller extends Page_Controller {
 
+	private $repository;
+	private $service;
+	
 	public function init() {
+		
+		$this->repository = Injector::inst()->create('Repository');
+		$this->service = Injector::inst()->create('Service');
+		
 		parent::init();
 	}
 	
@@ -211,15 +218,15 @@ class HealthAnalyserProfilPage_Controller extends Page_Controller {
 	
 	public function doImport($data, $form) {
 		
-		$content = HealthImporter::readZIP($data['XMLFile']['tmp_name']);
+		$content = $this->service->readZIP($data['XMLFile']['tmp_name']);
 		
 		if($content != null) {
 			
 			$xmlData = new SimpleXMLElement($content);
 			
-			$csvFile = HealthImporter::CreateCSVFile($xmlData);
+			$csvFile = $this->service->CreateCSVFileForImport($xmlData);
 			
-			HealthImporter::LoadDataInFile($csvFile);
+			$this->service->LoadDataInFile($csvFile);
 		}
 		else {
 			$form->AddErrorMessage('XMLFile', "Die Datei konnte nicht gelesen werden.", 'bad');
@@ -233,18 +240,42 @@ class HealthAnalyserProfilPage_Controller extends Page_Controller {
 	}
 	
 	public function IsEdit() {
-		return $this->getRequest()->getVar('edit') == '1';
+		$list = $this->getRequest()->getVar('edit') == '1';
+		return ($list != null) ? $list->count() : 0;
+	}
+	
+	public function StepsCount() {
+		$list = $this->repository->GetSteps();
+		return ($list != null) ? $list->count() : 0;
+	}
+	
+	public function DistanceCount() {
+		$list = $this->repository->GetDistance();
+		return ($list != null) ? $list->count() : 0;
+	}
+	
+	public function ClimbingCount() {
+		$list = $this->repository->GetClimbing();
+		return ($list != null) ? $list->count() : 0;
 	}
 
 	public function WeightCount() {
-		return 0;
-	}
-	
-	public function BloodPresureCount() {
-		return Health_Data::get()->filter(array('Type' => HealthImporter::XML_BPDIASTOLIC_TYPE, 'MemberID' => Member::currentUserID()))->count();
+		$list = $this->repository->GetWeight();
+		return ($list != null) ? $list->count() : 0;
 	}
 	
 	public function HearthRateCount() {
-		return Health_Data::get()->filter(array('Type' => HealthImporter::XML_HEARTRATE_TYPE, 'MemberID' => Member::currentUserID()))->count();
+		$list = $this->repository->GetHearthRate();
+		return ($list != null) ? $list->count() : 0;
+	}
+	
+	public function BPSystolicCount() {
+		$list = $this->repository->GetBPSystolic();
+		return ($list != null) ? $list->count() : 0;
+	}
+	
+	public function BPDiastolicCount() {
+		$list = $this->repository->GetBPDiastolic();
+		return ($list != null) ? $list->count() : 0;
 	}
 }

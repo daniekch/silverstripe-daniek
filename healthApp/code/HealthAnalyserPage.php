@@ -2,25 +2,42 @@
 
 class HealthAnalyserPage extends Page {
 	
-	private $hearthRateList;
-	private $bpsystolicList;
-	private $bpdiastolicList;
+
 }
 
 class HealthAnalyserPage_Controller extends Page_Controller {
-
+	
 	private static $allowed_actions = array('SearchForm');
 	
+	private $repository;
+	
+	private $stepsList;
+	private $distanceList;
+	private $climbList;
+	private $weightList;
+	private $hearthRateList;
+	private $bpsystolicList;
+	private $bpdiastolicList;
+	
+	
 	public function init() {
-		parent::init();
 		
 		if(!$this->CanHealthPageView()) {
-			$this->redirect($this->Link().'profil-informationen');
+			$this->redirect($this->LinkToHealthProfilPage());
 		}
 		
-		$this->hearthRateList = Health_Data::get()->filter(array('Type' => HealthImporter::XML_HEARTRATE_TYPE, 'MemberID' => Member::currentUserID()));
-		$this->bpsystolicList = Health_Data::get()->filter(array('Type' => HealthImporter::XML_BPSYSTOLIC_TYPE, 'MemberID' => Member::currentUserID()));
-		$this->bpdiastolicList = Health_Data::get()->filter(array('Type' => HealthImporter::XML_BPDIASTOLIC_TYPE, 'MemberID' => Member::currentUserID()));
+		$this->repository = Injector::inst()->create('Repository');
+		
+		$this->stepsList = $this->repository->GetSteps(true);
+		$this->distanceList = $this->repository->GetDistance(true);
+		$this->climbList = $this->repository->GetClimbing(true);
+		$this->weightList = $this->repository->GetWeight(true);
+		$this->hearthRateList =  $this->repository->GetHearthRate(true);
+		$this->bpsystolicList = $this->repository->GetBPSystolic(true);
+		$this->bpdiastolicList = $this->repository->GetBPDiastolic(true);
+		
+		
+		parent::init();
 	}
 	
 	public function SearchForm() {
@@ -84,31 +101,32 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 			$filter['EndDate:LessThanOrEqual'] = $dateTo->format('Y-m-d H:i:s');
 		}
 		
-		$this->hearthRateList = Health_HeartRate::get()->filter($filter)->sort('StartDate ASC');
-		$this->bpsystolicList = Health_BPSystolic::get()->filter($filter)->sort('StartDate ASC');
-		$this->bpdiastolicList = Health_BPDiastolic::get()->filter($filter)->sort('StartDate ASC');
+		$this->hearthRateList = $this->repository->GetHearthRate()->filter($filter)->sort('StartDate ASC');
+		$this->bpsystolicList = $this->repository->GetBPSystolic()->filter($filter)->sort('StartDate ASC');
+		$this->bpdiastolicList = $this->repository->GetBPDiastolic()->filter($filter)->sort('StartDate ASC');
+		$this->stepsList = $this->repository->GetSteps(true);
 		
 		return $this->render();
 	}
-
+	
 	public function GetHearthRateDateTime() {
-		return "'".implode("','", $this->hearthRateList->map('ID', 'StartDate')->toArray())."'";
+		return "'".implode("','", $this->hearthRateList->map('ID', 'StartDate'))."'";
 	}
 	
 	public function GetHearthRateValues() {
-		return implode(',', $this->hearthRateList->map('ID', 'Value')->toArray());
+		return implode(',', $this->hearthRateList->map('ID', 'Value'));
 	}
 	
 	public function GetHearthRateAvarageValues() {
-		return implode(',', $this->hearthRateList->map('ID', 'Value')->toArray());
+		return implode(',', $this->hearthRateList->map('ID', 'Value'));
 	}
 	
 	public function GetBPDateTime() {
-		return "'".implode("','", $this->bpsystolicList->map('ID', 'StartDate')->toArray())."'";
+		return "'".implode("','", $this->bpsystolicList->map('ID', 'StartDate'))."'";
 	}
 	
 	public function GetBPSystolicValues() {
-		return implode(',', $this->bpsystolicList->map('ID', 'Value')->toArray());
+		return implode(',', $this->bpsystolicList->map('ID', 'Value'));
 	}
 	
 	public function GetBPSystolicDefault() {
@@ -124,7 +142,23 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	}
 	
 	public function GetBPDiastolicValues() {
-		return implode(',', $this->bpdiastolicList->map('ID', 'Value')->toArray());
+		return implode(',', $this->bpdiastolicList->map('ID', 'Value')	);
+	}
+		
+	/**
+	 * Generate string of dates for steps
+	 * @return string
+	 */
+	public function GetStepsDateTime() {
+		return "'".implode("','", $this->stepsList->map('ID', 'StartDate'))."'";
+	}
+	
+	/**
+	 * Generate string of values for steps
+	 * @return string
+	 */
+	public function GetStepsValues() {
+		return implode(',', $this->stepsList->map('ID', 'Value'));
 	}
 	
 	public function GetBPDiastolicDefault() {
@@ -216,5 +250,19 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		}
 		
 		return false;
+	}
+	
+	public function LinkToHealthProfilPage() {
+	
+		if($children = $this->Children()) {
+				
+			$page = $children->filterByCallback(function ($item, $list) { return $item->getClassName() == 'HealthAnalyserProfilPage';});
+				
+			if ($page->exists()) {
+				return $page->first()->Link();
+			}
+		}
+	
+		return null;
 	}
 }

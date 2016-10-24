@@ -4,15 +4,21 @@
     <div class="container">
     
        <div class="center">
-            <h2>$Title</h2>
+            <h1>$Title</h1>
             <p class="lead">$Content</p>
         </div>
         
-         <div class="get-started center">
+         <div class="get-started center col-md-6 col-sm-6">
             <h2>Health Daten Konverter</h2>
             <p class="lead">Laden sie hier die ZIP Datei aus der App hoch, und generieren sie ein CSV.</p>
             {$ZIPImportForm}
         </div>
+        <div class="get-started center col-md-6 col-sm-6">
+            <h2>Health Daten Analyser</h2>
+            <p class="lead">Mit dem Healt Daten Analyser k&ouml;nnen sie die Daten visualisieren. Daf&uuml;r m&uuml;ssen sie sich registrieren und die Health Daten werden auf der Webseite gespeichert.</p>
+            <a href="{$LinkToHealthAnalyser}" alt="Analyser" class="btn btn-primary btn-lg">Analyser</a>
+        </div>
+        
 
         <div class="row">
             <div class="features">
