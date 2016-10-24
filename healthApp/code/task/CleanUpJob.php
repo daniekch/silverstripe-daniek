@@ -2,9 +2,9 @@
 
 class CleanUpTask extends BuildTask  {
 	
-	protected $title = 'Bereinigung Health Daten';
+	protected $title = 'Zusammenfuehren der Health Daten';
 	
-	protected $description = 'Bereinigen und Zusammenfuehren von Health Daten';
+	protected $description = 'Health Daten wie Schritt, Strecke und Stockwerke werden pro Tag in ein Datensatz zusammengefuehrt.';
 	
 	public function run($request) {
 
