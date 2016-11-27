@@ -53,6 +53,7 @@ assets/*
 _ss_environment.php
 tools/phing-metadata
 silverstripe-cache
+build/composer.phar
 .buildpath
 .project
 .settings
@@ -71,6 +72,4 @@ lumberjack
 reports
 siteconfig
 tagfield
-
-# Silverstripe custom config
-mysite/_config.php
+build/build.properties
