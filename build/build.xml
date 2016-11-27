@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="silverstripe-daniek" default="posttasks">
+
+	<property file="./build.properties" />
+
+    <!-- ============================================  -->
+    <!-- Target: build                                 -->
+    <!-- ============================================  -->
+    <target name="build">
+
+        <copy todir="${output.dir}/mysite" overwrite="true">
+			<fileset dir="../mysite" >
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${output.dir}/healthApp" overwrite="true">
+			<fileset dir="../healthApp" >
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${output.dir}/themes" overwrite="true">
+			<fileset dir="../themes" >
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${output.dir}" overwrite="true" >
+			<fileset dir="..">
+				<include name="composer.json" />
+				<include name="favicon.ico" />
+				<include name="index.php" />
+			</fileset>
+		</copy>
+
+    </target>
+	
+	<!-- Updates composer dependencies -->
+	<target name="composer-update" depends="get-composer">
+		<copy file="composer.phar" tofile="${output.dir}/composer.phar" overwrite="true"/>
+		<exec command="php composer.phar update" dir="${output.dir}" passthru="true" checkreturn="true" />
+	</target>
+	
+	<target name="composer-install-no-dev" depends="get-composer">
+		<copy file="composer.phar" tofile="${output.dir}/composer.phar" overwrite="true"/>
+		<exec command="php composer.phar install --no-dev" dir="${output.dir}" passthru="true" checkreturn="true" />
+	</target>
+
+	<!-- Downloads composer.phar -->
+	<target name="get-composer">
+		<if>
+			<not>
+				<available file="composer.phar" />
+			</not>
+			<then>
+				<echo msg="composer.phar not found. Downloading..." />
+				<httpget url="https://getcomposer.org/composer.phar" dir="." sslVerifyPeer="false"/>
+			</then>
+			<else>
+				<echo msg="composer.phar already exists" />
+			</else>
+		</if>
+	</target>
+
+    <target name="zipping" depends="build, composer-install-no-dev">
+
+        <zip destfile="${output.dir}/silverstripe-daniek.zip">
+            <fileset dir="${output.dir}">
+				<patternset>
+					<include name="**/*" />
+					<exclude name="composer.*" />
+				</patternset>
+            </fileset>
+        </zip>
+
+    </target>
+	
+	<target name="ftp" depends="zipping">
+		<ftpdeploy host="${ftp.host}" port="${ftp.port}" username="${ftp.username}" password="${ftp.password}" dir="${ftp.dir}" passive="false" mode="binary" >
+			<fileset dir="${output.dir}">
+				<include name="silverstripe-daniek.zip" />
+			</fileset>
+		</ftpdeploy>
+	</target>
+	
+	<target name="scpUpload" depends="zipping">
+		<scp username="${ssh.username}" password="${ssh.password}" host="${ssh.host}" todir="/home/caceaf6/installation/upload" file="${output.dir}/silverstripe-daniek.zip" />
+	</target>
+	
+	<target name="posttasks" depends="scpUpload">
+		<delete dir="${output.dir}" includeemptydirs="true" failonerror="true" />
+	</target>
+	
+</project>
