@@ -6,7 +6,7 @@
 	            <ul class="blog_archieve">
 	            	<% loop $Archive %>
 	                	<li>
-	                		<a href="{$Link}" title="{$Title}"><i class="fa fa-angle-double-right"></i> $Title</a>
+	                		<a href="{$Link}" title="{$Title}" rel="nofollow"><i class="fa fa-angle-double-right"></i> $Title</a>
 	                	</li>
 	                <% end_loop %>
 	            </ul>
