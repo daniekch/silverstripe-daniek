@@ -1,7 +1,25 @@
 <?php
 
 class HealthAnalyserProfilPage extends Page {
+	
+	private static $db = array (
+		'HealthData_Title'		=> 'Varchar(255)',
+		'HealthData_Desc'		=> 'Varchar(255)',
+		'HealthImport_Title'	=> 'Varchar(255)',
+		'HealthImport_Desc'		=> 'Varchar(255)'
+	);
 
+	public function getCMSFields() {
+	
+		$fields = parent::getCMSFields();
+	
+		$fields->addFieldToTab("Root.HealthData", new TextField('HealthData_Title', 'Titel'));
+		$fields->addFieldToTab("Root.HealthData", new TextField('HealthData_Desc', 'Beschreibung'));
+		$fields->addFieldToTab("Root.HealthImport", new TextField('HealthImport_Title', 'Titel'));
+		$fields->addFieldToTab("Root.HealthImport", new TextField('HealthImport_Desc', 'Beschreibung'));
+	
+		return $fields;
+	}
 }
 
 class HealthAnalyserProfilPage_Controller extends Page_Controller {
@@ -259,8 +277,8 @@ class HealthAnalyserProfilPage_Controller extends Page_Controller {
 		return ($list != null) ? $list->count() : 0;
 	}
 
-	public function WeightCount() {
-		$list = $this->repository->GetWeight();
+	public function BodyMassCount() {
+		$list = $this->repository->GetBodyMass();
 		return ($list != null) ? $list->count() : 0;
 	}
 	

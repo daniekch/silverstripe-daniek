@@ -5,7 +5,6 @@ Health_Data:
   xml_stepcount_type: HKQuantityTypeIdentifierStepCount
   xml_distance_type: HKQuantityTypeIdentifierDistanceWalkingRunning
   xml_climbed_type: HKQuantityTypeIdentifierFlightsClimbed
-  xml_weight_type: HKQuantityTypeIdentifierBodyMass
   xml_bodymass_type: HKQuantityTypeIdentifierBodyMass
   xml_hearthrate_type: HKQuantityTypeIdentifierHeartRate
   xml_bpsystolic_type: HKQuantityTypeIdentifierBloodPressureSystolic

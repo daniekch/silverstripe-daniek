@@ -60,14 +60,18 @@ class HealthOverviewPage extends Page {
 }
 
 class HealthOverviewPage_Controller extends Page_Controller {
+	
+	private $service;
 
 	static $allowed_actions = array(
 			'ZIPImportForm'
 	);
 	
 	public function init() {
+		
+		$this->service = Injector::inst()->create('Service');
+		
 		parent::init();
-
 	}
 	
 	/**
@@ -108,13 +112,13 @@ class HealthOverviewPage_Controller extends Page_Controller {
 	public function doZIPImport($data, $form) {
 		
 		try {
-			$content = HealthImporter::readZIP($data['ZIPFile']['tmp_name']);
+			$content = $this->service->readZIP($data['ZIPFile']['tmp_name']);
 			
 			if($content != null) {
 				
 				$xmlData = new SimpleXMLElement($content);
 					
-				$csvFile = HealthImporter::CreateCSVFile($xmlData);
+				$csvFile = $this->service->CreateCSVFile($xmlData);
 				$metaDatas = stream_get_meta_data($csvFile);
 				
 				$response = new SS_HTTPResponse();

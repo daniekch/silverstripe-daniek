@@ -6,6 +6,7 @@
     	<div class="center">
 			<h1>{$Title}</h1>
 		   	{$Content}
+		   	<a href="{$BaseHref}/outdoor/health-app/health-analyser" class="action btn btn-primary btn-lg">Zur&uuml;ck zum Health Analyser</a>
 		</div>
     	<div class="row">
     		<div class="col-xs-12 col-sm-5">
@@ -34,45 +35,59 @@
 	    		<% end_if %>
 		    </div>
 	    	<div class="col-xs-12 col-sm-6">
-	    		<h2>Ihre Health Daten</h2>
+	    		<h2>{$HealthData_Title}</h2>
 		    	<% if $CurrentMember %>
-		    		<p>Ihre aktuell importierten Daten sehen sie in der darunter liegenden Tabelle. Wenn sie ein neues XML File &uuml;ber die Importfunktion importieren, werden im XML nicht mehr enthalten Daten ebenfalls aus der Datenbank von Health Daniek gel&ouml;scht.</p>
+		    		<p>{$HealthData_Desc}</p>
 		    		<table>
 		    			<tr>
 		    				<th>Type</th>
 		    				<th>Anzahl</th>
 		    			</tr>
-		    			<tr>
-		    				<td>Schritte</td>
-		    				<td>$StepsCount</td>
-		    			</tr>
-		    			<tr>
-		    				<td>Distanz</td>
-		    				<td>$DistanceCount</td>
-		    			</tr>
-		    			<tr>
-		    				<td>H&ouml;he</td>
-		    				<td>$ClimbingCount</td>
-		    			</tr>
-		    			<tr>
-		    				<td>Gewicht</td>
-		    				<td>$WeightCount</td>
-		    			</tr>
-		    			<tr>
-		    				<td>Puls</td>
-		    				<td>$HearthRateCount</td>
-		    			</tr>
-		    			<tr>
-		    				<td>Blutdruck (Systolic)</td>
-		    				<td>$BPSystolicCount</td>
-		    			</tr>
-		    			<tr>
-		    				<td>Blutdruck (Diastolic)</td>
-		    				<td>$BPDiastolicCount</td>
-		    			</tr>
+		    			<% if $StepsCount %>
+			    			<tr>
+			    				<td>Schritte</td>
+			    				<td>$StepsCount</td>
+			    			</tr>
+		    			<% end_if %>
+		    			<% if $DistanceCount %>
+			    			<tr>
+			    				<td>Distanz</td>
+			    				<td>$DistanceCount</td>
+			    			</tr>
+		    			<% end_if %>
+		    			<% if $ClimbingCount %>
+			    			<tr>
+			    				<td>H&ouml;he</td>
+			    				<td>$ClimbingCount</td>
+			    			</tr>
+		    			<% end_if %>
+		    			<% if $BodyMassCount %>
+			    			<tr>
+			    				<td>Gewicht</td>
+			    				<td>$BodyMassCount</td>
+			    			</tr>
+		    			<% end_if %>
+		    			<% if $HearthRateCount %>
+			    			<tr>
+			    				<td>Puls</td>
+			    				<td>$HearthRateCount</td>
+			    			</tr>
+		    			<% end_if %>
+		    			<% if $BPSystolicCount %>
+			    			<tr>
+			    				<td>Blutdruck (Systolic)</td>
+			    				<td>$BPSystolicCount</td>
+			    			</tr>
+		    			<% end_if %>
+		    			<% if $BPDiastolicCount %>
+			    			<tr>
+			    				<td>Blutdruck (Diastolic)</td>
+			    				<td>$BPDiastolicCount</td>
+			    			</tr>
+		    			<% end_if %>
 		    		</table>
-		    		<h2>Health Daten Import</h2>
-		    		<p>Das Health XML k&ouml;nnen sie auf dem iPhone in der Health-App im Men&uuml; Daten unter "Alle" mit der Exportfunktion am rechten oberen Rand exportieren.</p>
+		    		<h2>{$HealthImport_Title}</h2>
+		    		<p>{$HealthImport_Desc}</p>
 			    	$ImportForm
 		      	<% else %>
 		      		Sie m&uuml;ssen eingeloggt sein um Daten importieren oder sehen zu k&ouml;nnen.

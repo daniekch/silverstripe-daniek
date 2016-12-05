@@ -1,19 +1,19 @@
 <?php
+
+/**
+ * Health Service class.
+ * 
+ * The Health Service provide health app with usfull function.
+ */
 class HealthService {
     
 	private $config;
-	public $repository;
+	private $repository;
     
     function __construct() {
     	$this->config = Config::inst();
+    	$this->repository = Injector::inst()->create('Repository');
     }
-    
-    /**
-     * Dependencies Class for HealthService.
-     */
-    static $dependencies = array(
-    	'repository'    => '%$Repository'
-    );
     
     /**
      * Merge some types of data in only one record.
@@ -177,7 +177,7 @@ class HealthService {
     public function LoadDataInFile($csvFile) {
     	
     	$metaDatas = stream_get_meta_data($csvFile);
-    	return self::$repository->InsertDataFromFile($metaDatas['uri']);
+    	return $this->repository->InsertDataFromFile($metaDatas['uri']);
     }
     
     /**

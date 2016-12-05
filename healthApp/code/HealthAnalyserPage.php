@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * Health analyser page
+ */
 class HealthAnalyserPage extends Page {
 	
-
 }
 
+/**
+ * Health analyser page controller
+ */
 class HealthAnalyserPage_Controller extends Page_Controller {
 	
 	private static $allowed_actions = array('SearchForm');
@@ -14,12 +19,14 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	private $stepsList;
 	private $distanceList;
 	private $climbList;
-	private $weightList;
+	private $bodyMassList;
 	private $hearthRateList;
 	private $bpsystolicList;
 	private $bpdiastolicList;
 	
-	
+	/**
+	 * Init controller
+	 */
 	public function init() {
 		
 		if(!$this->CanHealthPageView()) {
@@ -31,7 +38,7 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		$this->stepsList = $this->repository->GetSteps(true);
 		$this->distanceList = $this->repository->GetDistance(true);
 		$this->climbList = $this->repository->GetClimbing(true);
-		$this->weightList = $this->repository->GetWeight(true);
+		$this->bodyMassList = $this->repository->GetBodyMass(true);
 		$this->hearthRateList =  $this->repository->GetHearthRate(true);
 		$this->bpsystolicList = $this->repository->GetBPSystolic(true);
 		$this->bpdiastolicList = $this->repository->GetBPDiastolic(true);
@@ -40,6 +47,10 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		parent::init();
 	}
 	
+	/**
+	 * Generate search form
+	 * @return form
+	 */
 	public function SearchForm() {
 		
 		$datefieldFrom = new DateField('From', 'Von');
@@ -72,6 +83,10 @@ class HealthAnalyserPage_Controller extends Page_Controller {
         return $form;
 	}
 	
+	/**
+	 * Action of Search form
+	 * @return rendering
+	 */
 	public function doSearchForm($data, $form) {
 		
 		$datefrom;
@@ -108,49 +123,14 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		
 		return $this->render();
 	}
-	
-	public function GetHearthRateDateTime() {
-		return "'".implode("','", $this->hearthRateList->map('ID', 'StartDate'))."'";
-	}
-	
-	public function GetHearthRateValues() {
-		return implode(',', $this->hearthRateList->map('ID', 'Value'));
-	}
-	
-	public function GetHearthRateAvarageValues() {
-		return implode(',', $this->hearthRateList->map('ID', 'Value'));
-	}
-	
-	public function GetBPDateTime() {
-		return "'".implode("','", $this->bpsystolicList->map('ID', 'StartDate'))."'";
-	}
-	
-	public function GetBPSystolicValues() {
-		return implode(',', $this->bpsystolicList->map('ID', 'Value'));
-	}
-	
-	public function GetBPSystolicDefault() {
-		
-		$return = array();
-		
-		foreach ($this->bpsystolicList as $item) {
-			
-			$return[] = "135";
-		}
-		
-		return implode(',', $return);
-	}
-	
-	public function GetBPDiastolicValues() {
-		return implode(',', $this->bpdiastolicList->map('ID', 'Value')	);
-	}
 		
 	/**
 	 * Generate string of dates for steps
 	 * @return string
 	 */
 	public function GetStepsDateTime() {
-		return "'".implode("','", $this->stepsList->map('ID', 'StartDate'))."'";
+		
+		return $this->FormatHealthDate($this->stepsList);
 	}
 	
 	/**
@@ -158,9 +138,129 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	 * @return string
 	 */
 	public function GetStepsValues() {
-		return implode(',', $this->stepsList->map('ID', 'Value'));
+		
+		return $this->GetHealthValueString($this->stepsList);
 	}
 	
+	/**
+	 * Generate string of dates for distance
+	 * @return string
+	 */
+	public function GetDistanceDateTime() {
+		
+		return $this->FormatHealthDate($this->distanceList);
+	}
+	
+	/**
+	 * Generate string of values for distance
+	 * @return string
+	 */
+	public function GetDistanceValues() {
+		
+		return $this->GetHealthValueString($this->distanceList);
+	}
+	
+	/**
+	 * Generate string of dates for climbing
+	 * @return string
+	 */
+	public function GetClimbeDateTime() {
+		
+		return $this->FormatHealthDate($this->climbList);
+	}
+	
+	/**
+	 * Generate string of values for climbing
+	 * @return string
+	 */
+	public function GetClimbeValues() {
+		
+		return $this->GetHealthValueString($this->climbList);
+	}
+	
+	/**
+	 * Generate string of dates for BodyMass
+	 * @return string
+	 */
+	public function GetBodyMassDateTime() {
+		
+		return $this->FormatHealthDate($this->bodyMassList);
+	}
+	
+	/**
+	 * Generate string of values for BodyMass
+	 * @return string
+	 */
+	public function GetBodyMassValues() {
+		
+		return $this->GetHealthValueString($this->bodyMassList);
+	}
+	
+	/**
+	 * Generate string of dates for heartrate
+	 * @return string
+	 */
+	public function GetHearthRateDateTime() {
+		
+		return $this->FormatHealthDate($this->hearthRateList, false);
+	}
+	
+	/**
+	 * Generate string of values for heartrate
+	 * @return string
+	 */
+	public function GetHearthRateValues() {
+		
+		return $this->GetHealthValueString($this->hearthRateList);
+	}
+	
+	/**
+	 * Generate string of dates for bloodpresure
+	 * @return string
+	 */
+	public function GetBPDateTime() {
+		
+		return $this->FormatHealthDate($this->bpdiastolicList, false);
+	}
+	
+	/**
+	 * Generate string of values for bloodpresure diastolic
+	 * @return string
+	 */
+	public function GetBPDiastolicValues() {
+		
+		return $this->GetHealthValueString($this->bpdiastolicList);
+	}
+	
+	/**
+	 * Generate string of values for bloodpresure systolic
+	 * @return string
+	 */
+	public function GetBPSystolicValues() {
+		
+		return $this->GetHealthValueString($this->bpsystolicList);
+	}
+	
+	/**
+	 * Get Systolic default value
+	 * @return string
+	 */
+	public function GetBPSystolicDefault() {
+	
+		$return = array();
+	
+		foreach ($this->bpsystolicList as $item) {
+				
+			$return[] = "135";
+		}
+	
+		return implode(',', $return);
+	}
+	
+	/**
+	 * Get Diastolic default value
+	 * @return string
+	 */
 	public function GetBPDiastolicDefault() {
 	
 		$return = array();
@@ -172,8 +272,12 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	
 		return implode(',', $return);
 	}
-
-	public function CalResult() {
+	
+	/**
+	 * Calculate result of blood presure
+	 * @return ArrayList
+	 */
+	public function CalcBPResult() {
 		
 		$minSys = 99999;
 		$maxSys = 0;
@@ -232,15 +336,11 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		 		))
 		));
 	}
-	
-	public function getEncodedHealthAppURL() {
-		return urlencode($this->Link());
-	}
-	
-	public function GetTotalCountHealthData() {
-		return $this->hearthRateList->count() + $this->bpsystolicList->count() + $this->bpdiastolicList->count();
-	}
 
+	/**
+	 * Validate User rights for analyser page
+	 * @return boolean
+	 */
 	public function CanHealthPageView() {
 		
 		$group = DataObject::get_one('Group', array('Code' => 'HealthAnalyserAppUsers'));
@@ -252,6 +352,10 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		return false;
 	}
 	
+	/**
+	 * Generate Link to profile page
+	 * @return ArrayList
+	 */
 	public function LinkToHealthProfilPage() {
 	
 		if($children = $this->Children()) {
@@ -264,5 +368,32 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 		}
 	
 		return null;
+	}
+	
+	/**
+	 * Formate health value
+	 * @return string|null
+	 */
+	private function GetHealthValueString($sourceList) {
+		
+		$list = $sourceList->map('ID', 'Value');
+		
+		return (!empty($list)) ? implode(',', $list) : null;
+	}
+	
+	/**
+	 * Formate date for chart
+	 * @return string|null
+	 */
+	private function FormatHealthDate($sourceList, $withoutTime = true) {
+		
+		$return = array();
+		
+		foreach ($sourceList->map('ID', 'StartDate') as $startDate) {
+			$date = new DateTime($startDate);
+			array_push($return, ($withoutTime) ? $date->format("d.m.Y") : $date->format("d.m.Y H:i"));
+		}
+		
+		return (!empty($return)) ? "'".implode("','", $return)."'" : null;
 	}
 }

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Health repository class.
+ * 
+ * The repositoy provide the health application with data.
+ */
 class HealthRepository {
 	
 	public $config;
@@ -9,37 +14,71 @@ class HealthRepository {
 	}
 	
 	/**
-	 * Get Steps
+	 * Get Steps from health data.
+	 * 
+	 * @param boolean $limited
 	 * @return ArrayList
 	 */
 	public function GetSteps($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_stepcount_type'), $limited, true);
 	}
 	
+	/**
+	 * Get Distance from health data.
+	 *
+	 * @param boolean $limited
+	 * @return ArrayList
+	 */
 	public function GetDistance($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_distance_type'), $limited, true);
 	}
 	
+	/**
+	 * Get Climbing from health data.
+	 *
+	 * @param boolean $limited
+	 * @return ArrayList
+	 */
 	public function GetClimbing($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_climbed_type'), $limited, true);
 	}
 	
-	public function GetWeight($limited = false) {
-		return self::GetHealthData($this->config->get('Health_Data', 'xml_weight_type'), $limited);
-	}
-	
+	/**
+	 * Get BodyMass from health data.
+	 *
+	 * @param boolean $limited
+	 * @return ArrayList
+	 */
 	public function GetBodyMass($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_bodymass_type'), $limited);
 	}
 	
+	/**
+	 * Get Hearthrate from health data.
+	 *
+	 * @param boolean $limited
+	 * @return ArrayList
+	 */
 	public function GetHearthRate($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_hearthrate_type'), $limited);
 	}
 	
+	/**
+	 * Get Blood pressure systolic from health data.
+	 *
+	 * @param boolean $limited
+	 * @return ArrayList
+	 */
 	public function GetBPSystolic($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_bpsystolic_type'), $limited);
 	}
 	
+	/**
+	 * Get Blood pressure diastolic from health data.
+	 *
+	 * @param boolean $limited
+	 * @return ArrayList
+	 */
 	public function GetBPDiastolic($limited = false) {
 		return self::GetHealthData($this->config->get('Health_Data', 'xml_bpdiastolic_type'), $limited);
 	}
@@ -64,6 +103,14 @@ class HealthRepository {
 		}
 	}
 	
+	/**
+	 * Get Health data from database.
+	 *
+	 * @param string $type
+	 * @param boolean $limited
+	 * @param boolean $groupByData
+	 * @return ArrayList
+	 */
 	private function GetHealthData($type, $limited = false, $groupByData = false) {
 		
 		$query = "  SELECT `ID` as ID,";
@@ -95,12 +142,13 @@ class HealthRepository {
 		}
 	
 		$result = DB::query($query);
-	
+		
 		return $this->GetArrayList($result);
 	}
 	
 	/**
 	 * Generate a ArrayList of MySQLQuery
+	 * 
 	 * @param MySQLQuery $result
 	 * @return ArrayList|NULL
 	 */
