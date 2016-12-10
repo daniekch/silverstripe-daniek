@@ -56,8 +56,16 @@ class CustomLoginForm extends MemberLoginForm
     	parent::logout();
     }
     
-    public function LoginByMovesCount($data)
-    {
+    public function LoginByMovesCount($data) {
     	return true;
+    }
+    
+    public function IsRegistrationSuccessfully() {
+    	
+    	if ($this->controller->getRequest()->requestVar('registered') == '1') {
+    		return true;
+    	}
+    	
+    	return false;
     }
 }

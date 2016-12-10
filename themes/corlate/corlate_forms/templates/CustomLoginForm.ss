@@ -7,9 +7,12 @@
 		<div class="container">
 	   		
 			<div class="row contact-wrap">
-			      
+				
 			    <form id="main-contact-form" class="contact-form" $FormAttributes>
 			        <div class="col-sm-6 col-sm-offset-3">
+			        	<% if $IsRegistrationSuccessfully %>
+					  		<div class="success">Ihre Registration war erfogreich. Bitte loggen Sie sich mit ihren Daten ein.</div>
+					  	<% end_if %>
 			            <div class="form-group">
 			                <label>{$Fields.dataFieldByName(Email).Title}</label>
 			                {$Fields.dataFieldByName(Email)}
@@ -30,8 +33,9 @@
 			            <div class="form-group">
 			            	<% loop $Actions %>$Field<% end_loop %>
 			            </div>
+			            <p>Haben Sie noch kein Login? <a href="{$BaseHref}registration" title="zur Registration">Zur Registration</a>.</p>
 			        </div>
-			    </form> 
+			    </form>
 			</div>
 		</div>
 	</section>
