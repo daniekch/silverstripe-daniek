@@ -12,9 +12,3 @@ Health_Data:
   
 HealthRepository:
   data_day_interval: 60
-
-Injector:
-  Repository:
-    class: HealthRepository
-  Service:
-    class: HealthService

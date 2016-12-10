@@ -36,7 +36,7 @@
 		    </div>
 	    	<div class="col-xs-12 col-sm-6">
 	    		<h2>{$HealthData_Title}</h2>
-		    	<% if $CurrentMember %>
+		    	<% if $HasHealthData %>
 		    		<p>{$HealthData_Desc}</p>
 		    		<table>
 		    			<tr>
@@ -86,12 +86,12 @@
 			    			</tr>
 		    			<% end_if %>
 		    		</table>
-		    		<h2>{$HealthImport_Title}</h2>
-		    		<p>{$HealthImport_Desc}</p>
-			    	$ImportForm
-		      	<% else %>
-		      		Sie m&uuml;ssen eingeloggt sein um Daten importieren oder sehen zu k&ouml;nnen.
+		    	<% else %>
+		      		<i>Sie haben noch keine Daten importiert.</i>
 		        <% end_if %>
+	    		<h2>{$HealthImport_Title}</h2>
+	    		<p>{$HealthImport_Desc}</p>
+		    	$ImportForm
 			</div>
     	</div>
 	

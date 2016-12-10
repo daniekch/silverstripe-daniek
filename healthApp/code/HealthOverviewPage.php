@@ -69,7 +69,7 @@ class HealthOverviewPage_Controller extends Page_Controller {
 	
 	public function init() {
 		
-		$this->service = Injector::inst()->create('Service');
+		$this->service = Injector::inst()->get('HealthService');
 		
 		parent::init();
 	}

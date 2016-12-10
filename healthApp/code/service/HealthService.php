@@ -8,11 +8,16 @@
 class HealthService {
     
 	private $config;
-	private $repository;
+	public $repository;
+	
+	static $dependencies = array(
+		'repository'	=> '%$HealthRepository'
+	);
     
     function __construct() {
+    	
     	$this->config = Config::inst();
-    	$this->repository = Injector::inst()->create('Repository');
+    	//$this->repository = Injector::inst()->create('Repository');
     }
     
     /**
@@ -204,5 +209,141 @@ class HealthService {
     	}
     	
     	return null;
+    }
+    
+    /**
+     * Get Steps from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetSteps($limited = false) {
+    	return $this->repository->GetSteps($limited);
+    }
+    
+    /**
+     * Get Distance from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetDistance($limited = false) {
+    	return $this->repository->GetDistance($limited);
+    }
+    
+    /**
+     * Get Climbing from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetClimbing($limited = false) {
+    	return $this->repository->GetClimbing($limited);
+    }
+    
+    /**
+     * Get BodyMass from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetBodyMass($limited = false) {
+    	return $this->repository->GetBodyMass($limited);
+    }
+    
+    /**
+     * Get Hearthrate from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetHearthRate($limited = false) {
+    	return $this->repository->GetHearthRate($limited);
+    }
+    
+    /**
+     * Get Blood pressure systolic from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetBPSystolic($limited = false) {
+    	return $this->repository->GetBPSystolic($limited);
+    }
+    
+    /**
+     * Get Blood pressure diastolic from health data.
+     *
+     * @param boolean $limited
+     * @return ArrayList
+     */
+    public function GetBPDiastolic($limited = false) {
+    	return $this->repository->GetBPDiastolic($limited);
+    }
+    
+    public function StepsCount() {
+    	$list = $this->repository->GetSteps();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    public function DistanceCount() {
+    	$list = $this->repository->GetDistance();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    public function ClimbingCount() {
+    	$list = $this->repository->GetClimbing();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    public function BodyMassCount() {
+    	$list = $this->repository->GetBodyMass();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    public function HearthRateCount() {
+    	$list = $this->repository->GetHearthRate();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    public function BPSystolicCount() {
+    	$list = $this->repository->GetBPSystolic();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    public function BPDiastolicCount() {
+    	$list = $this->repository->GetBPDiastolic();
+    	return ($list != null) ? $list->count() : 0;
+    }
+    
+    /**
+     * Check if user have any data imported
+     * @return boolean
+     */
+    public function UserHasData() {
+    	
+    	if ($this->repository->GetSteps() != null) {
+    		return true;
+    	}
+    	elseif ($this->repository->GetDistance() != null) {
+    		return true;
+    	}
+    	elseif ($this->repository->GetClimbing() != null) {
+    		return true;
+    	}
+    	elseif ($this->repository->GetBodyMass() != null) {
+    		return true;
+    	}
+    	elseif ($this->repository->GetHearthRate() != null) {
+    		return true;
+    	}
+    	elseif ($this->repository->GetBPDiastolic() != null) {
+    		return true;
+    	}
+    	elseif ($this->repository->GetBPSystolic() != null) {
+    		return true;
+    	}
+    	
+    	return false;
     }
 }

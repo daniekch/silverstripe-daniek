@@ -14,7 +14,7 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	
 	private static $allowed_actions = array('SearchForm');
 	
-	private $repository;
+	private $service;
 	
 	private $stepsList;
 	private $distanceList;
@@ -29,20 +29,15 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	 */
 	public function init() {
 		
-		if(!$this->CanHealthPageView()) {
-			$this->redirect($this->LinkToHealthProfilPage());
-		}
+		$this->service = Injector::inst()->get('HealthService');
 		
-		$this->repository = Injector::inst()->create('Repository');
-		
-		$this->stepsList = $this->repository->GetSteps(true);
-		$this->distanceList = $this->repository->GetDistance(true);
-		$this->climbList = $this->repository->GetClimbing(true);
-		$this->bodyMassList = $this->repository->GetBodyMass(true);
-		$this->hearthRateList =  $this->repository->GetHearthRate(true);
-		$this->bpsystolicList = $this->repository->GetBPSystolic(true);
-		$this->bpdiastolicList = $this->repository->GetBPDiastolic(true);
-		
+		$this->stepsList = $this->service->GetSteps(true);
+		$this->distanceList = $this->service->GetDistance(true);
+		$this->climbList = $this->service->GetClimbing(true);
+		$this->bodyMassList = $this->service->GetBodyMass(true);
+		$this->hearthRateList =  $this->service->GetHearthRate(true);
+		$this->bpsystolicList = $this->service->GetBPSystolic(true);
+		$this->bpdiastolicList = $this->service->GetBPDiastolic(true);
 		
 		parent::init();
 	}
@@ -116,10 +111,10 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 			$filter['EndDate:LessThanOrEqual'] = $dateTo->format('Y-m-d H:i:s');
 		}
 		
-		$this->hearthRateList = $this->repository->GetHearthRate()->filter($filter)->sort('StartDate ASC');
-		$this->bpsystolicList = $this->repository->GetBPSystolic()->filter($filter)->sort('StartDate ASC');
-		$this->bpdiastolicList = $this->repository->GetBPDiastolic()->filter($filter)->sort('StartDate ASC');
-		$this->stepsList = $this->repository->GetSteps(true);
+		$this->hearthRateList = $this->service->GetHearthRate()->filter($filter)->sort('StartDate ASC');
+		$this->bpsystolicList = $this->service->GetBPSystolic()->filter($filter)->sort('StartDate ASC');
+		$this->bpdiastolicList = $this->service->GetBPDiastolic()->filter($filter)->sort('StartDate ASC');
+		$this->stepsList = $this->service->GetSteps(true);
 		
 		return $this->render();
 	}
@@ -371,14 +366,26 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	}
 	
 	/**
+	 * Check if any data imported
+	 * @return boolean
+	 */
+	public function HasHealthData() {
+		return $this->service->UserHasData();
+	}
+	
+	/**
 	 * Formate health value
 	 * @return string|null
 	 */
 	private function GetHealthValueString($sourceList) {
 		
-		$list = $sourceList->map('ID', 'Value');
+		if (!empty($sourceList)) {
+			$list = $sourceList->map('ID', 'Value');
+			
+			return implode(',', $list);
+		}
 		
-		return (!empty($list)) ? implode(',', $list) : null;
+		return null;
 	}
 	
 	/**
