@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="silverstripe-daniek" default="posttasks">
+<project name="${projekt.name}" default="posttasks">
 
 	<property file="./build.properties" />
 
@@ -66,7 +66,7 @@
 
     <target name="zipping" depends="build, composer-install-no-dev">
 
-        <zip destfile="${output.dir}/silverstripe-daniek.zip">
+        <zip destfile="${output.dir}/${output.zip}">
             <fileset dir="${output.dir}">
 				<patternset>
 					<include name="**/*" />
@@ -80,13 +80,13 @@
 	<target name="ftp" depends="zipping">
 		<ftpdeploy host="${ftp.host}" port="${ftp.port}" username="${ftp.username}" password="${ftp.password}" dir="${ftp.dir}" passive="false" mode="binary" >
 			<fileset dir="${output.dir}">
-				<include name="silverstripe-daniek.zip" />
+				<include name="${output.zip}" />
 			</fileset>
 		</ftpdeploy>
 	</target>
 	
 	<target name="scpUpload" depends="zipping">
-		<scp username="${ssh.username}" password="${ssh.password}" host="${ssh.host}" todir="/home/caceaf6/installation/upload" file="${output.dir}/silverstripe-daniek.zip" />
+		<scp username="${ssh.username}" password="${ssh.password}" host="${ssh.host}" todir="${ssh.toDir}" file="${output.dir}/${output.zip}" />
 	</target>
 	
 	<target name="posttasks" depends="scpUpload">
