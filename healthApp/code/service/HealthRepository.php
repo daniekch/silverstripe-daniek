@@ -92,8 +92,8 @@ class HealthRepository {
 	public function InsertDataFromFile($path) {
 		 
 		try {
-			DB::query("DELETE FROM health_data WHERE MemberID = ".Member::currentUserID());
-			DB::query("LOAD DATA LOCAL INFILE '".addslashes($path)."' REPLACE INTO TABLE health_data FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES (Type, Value, StartDate, EndDate, MemberID) SET LastEdited = NOW(), Created = NOW()");
+			DB::query("DELETE FROM Health_Data WHERE MemberID = ".Member::currentUserID());
+			DB::query("LOAD DATA LOCAL INFILE '".addslashes($path)."' REPLACE INTO TABLE Health_Data FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES (Type, Value, StartDate, EndDate, MemberID) SET LastEdited = NOW(), Created = NOW()");
 			 
 			return true;
 			
@@ -123,7 +123,7 @@ class HealthRepository {
 		else {
 			$query .= "`Value` as Value";
 		}
-		$query .= " FROM `health_data`";
+		$query .= " FROM `Health_Data`";
 		$query .= " WHERE `Type` = '".$type."'";
 		$query .= " AND `MemberID` = ".Member::currentUserID();
 		
@@ -131,7 +131,7 @@ class HealthRepository {
 			
 			$query .= " AND DATE(`StartDate`) >= (";
 			$query .= " SELECT MAX(`StartDate`) as StartDate ";
-			$query .= " FROM `health_data`";
+			$query .= " FROM `Health_Data`";
 			$query .= " WHERE `Type` = '".$type."'";
 			$query .= " AND `MemberID` = ".Member::currentUserID().") - INTERVAL ".intval($this->config->get('HealthRepository', 'data_day_interval'))." DAY";
 		}
