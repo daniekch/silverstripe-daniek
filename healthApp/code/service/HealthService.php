@@ -69,10 +69,10 @@ class HealthService {
 	    				'Adjusted' 						=> 0
 	   			));
 	    		
-	   			$count = 0;
+	   			$count = 0.00;
 	    			
 	   			foreach ($filteredList as $duplicate) {
-	   				$count = $count + intval($duplicate->Value);
+	   				$count = $count + floatval($duplicate->Value);
 	   				$toDelete->push($duplicate);
 	   			}
 	    		
