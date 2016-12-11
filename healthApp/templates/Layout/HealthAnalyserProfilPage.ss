@@ -43,48 +43,34 @@
 		    				<th>Type</th>
 		    				<th>Anzahl</th>
 		    			</tr>
-		    			<% if $StepsCount %>
-			    			<tr>
-			    				<td>Schritte</td>
-			    				<td>$StepsCount</td>
-			    			</tr>
-		    			<% end_if %>
-		    			<% if $DistanceCount %>
-			    			<tr>
-			    				<td>Distanz</td>
-			    				<td>$DistanceCount</td>
-			    			</tr>
-		    			<% end_if %>
-		    			<% if $ClimbingCount %>
-			    			<tr>
-			    				<td>H&ouml;he</td>
-			    				<td>$ClimbingCount</td>
-			    			</tr>
-		    			<% end_if %>
-		    			<% if $BodyMassCount %>
-			    			<tr>
-			    				<td>Gewicht</td>
-			    				<td>$BodyMassCount</td>
-			    			</tr>
-		    			<% end_if %>
-		    			<% if $HearthRateCount %>
-			    			<tr>
-			    				<td>Puls</td>
-			    				<td>$HearthRateCount</td>
-			    			</tr>
-		    			<% end_if %>
-		    			<% if $BPSystolicCount %>
-			    			<tr>
-			    				<td>Blutdruck (Systolic)</td>
-			    				<td>$BPSystolicCount</td>
-			    			</tr>
-		    			<% end_if %>
-		    			<% if $BPDiastolicCount %>
-			    			<tr>
-			    				<td>Blutdruck (Diastolic)</td>
-			    				<td>$BPDiastolicCount</td>
-			    			</tr>
-		    			<% end_if %>
+		    			<tr>
+		    				<td>Schritte</td>
+		    				<td><% if $StepsCount %>$StepsCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
+		    			<tr>
+		    				<td>Distanz</td>
+		    				<td><% if $DistanceCount %>$DistanceCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
+		    			<tr>
+		    				<td>H&ouml;he</td>
+		    				<td><% if $ClimbingCount %>$ClimbingCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
+		    			<tr>
+		    				<td>Gewicht</td>
+		    				<td><% if $BodyMassCount %>$BodyMassCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
+		    			<tr>
+		    				<td>Puls</td>
+		    				<td><% if $HearthRateCount %>$HearthRateCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
+		    			<tr>
+		    				<td>Blutdruck (Systolic)</td>
+		    				<td><% if $BPSystolicCount %>$BPSystolicCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
+		    			<tr>
+		    				<td>Blutdruck (Diastolic)</td>
+		    				<td><% if $BPDiastolicCount %>$BPDiastolicCount<% else %><i>keine Daten</i><% end_if %></td>
+		    			</tr>
 		    		</table>
 		    	<% else %>
 		      		<i>Sie haben noch keine Daten importiert.</i>
@@ -94,6 +80,5 @@
 		    	$ImportForm
 			</div>
     	</div>
-	
 	</div>
 </section>
