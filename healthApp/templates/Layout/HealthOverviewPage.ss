@@ -16,7 +16,7 @@
         <div class="get-started center col-md-6 col-sm-6">
             <h2>Health Daten Analyser</h2>
             <p class="lead">Mit dem Healt Daten Analyser k&ouml;nnen sie die Daten visualisieren. Daf&uuml;r m&uuml;ssen sie sich registrieren und die Health Daten werden auf der Webseite gespeichert.</p>
-            <a href="{$baseUrl}outdoor/health-app/health-analyser" alt="Analyser" class="btn btn-primary btn-lg">Analyser</a>
+            <a href="{$LinkToHealthAnalyser}" alt="Analyser" class="btn btn-primary btn-lg">Analyser</a>
         </div>
         
 

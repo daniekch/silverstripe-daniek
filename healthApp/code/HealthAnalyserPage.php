@@ -353,7 +353,7 @@ class HealthAnalyserPage_Controller extends Page_Controller {
 	 */
 	public function LinkToHealthProfilPage() {
 	
-		if($children = $this->Children()) {
+		if($children = $this->liveChildren(true)) {
 				
 			$page = $children->filterByCallback(function ($item, $list) { return $item->getClassName() == 'HealthAnalyserProfilPage';});
 				

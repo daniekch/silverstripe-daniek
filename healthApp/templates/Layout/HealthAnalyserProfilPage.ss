@@ -6,7 +6,7 @@
     	<div class="center">
 			<h1>{$Title}</h1>
 		   	{$Content}
-		   	<a href="{$BaseHref}/outdoor/health-app/health-analyser" class="action btn btn-primary btn-lg">Zur&uuml;ck zum Health Analyser</a>
+		   	<a href="{$Parent.Link}" class="action btn btn-primary btn-lg">Zur&uuml;ck zum Health Analyser</a>
 		</div>
     	<div class="row">
     		<div class="col-xs-12 col-sm-5">
