@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="${projekt.name}" default="posttasks">
+<project name="Silverstripe CMS" default="posttasks">
 
 	<property file="./build.properties" />
 
