@@ -21,6 +21,12 @@
 			</fileset>
 		</copy>
 		
+		<copy todir="${output.dir}/fitBitApp" overwrite="true">
+			<fileset dir="../fitBitApp" >
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
 		<copy todir="${output.dir}/themes" overwrite="true">
 			<fileset dir="../themes" >
 				<include name="**/*" />
