@@ -14,4 +14,7 @@ i18n::set_time_format('HH:mm:ss');
 Object::useCustomClass('MemberLoginForm', 'CustomLoginForm');
 
 // log errors and warnings
-SS_Log::add_writer(new SS_LogFileWriter('../mysite/logs/logfile-'.date("Ymd").'.log'), SS_Log::INFO);
+SS_Log::add_writer(new SS_LogFileWriter('../mysite/logs/debug-logfile-'.date("Ymd").'.log'), SS_Log::DEBUG);
+SS_Log::add_writer(new SS_LogFileWriter('../mysite/logs/info-logfile-'.date("Ymd").'.log'), SS_Log::INFO);
+SS_Log::add_writer(new SS_LogFileWriter('../mysite/logs/warn-logfile-'.date("Ymd").'.log'), SS_Log::WARN);
+SS_Log::add_writer(new SS_LogFileWriter('../mysite/logs/err-logfile-'.date("Ymd").'.log'), SS_Log::ERR);
