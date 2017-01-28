@@ -74,4 +74,6 @@ siteconfig
 tagfield
 build/build.properties
 *.log
+
+# Fitbit App config
 fitBitApp/_config/config.yml
