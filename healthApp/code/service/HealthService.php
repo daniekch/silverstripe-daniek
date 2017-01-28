@@ -200,8 +200,10 @@ class HealthService {
     		for ($i = 0; $i < $za->numFiles; $i++){
     				
     			$infoEntry = $za->statIndex($i);
-    				
-    			if ($infoEntry['name'] == 'apple_health_export/Exportieren.xml' || $infoEntry['name'] == 'Exportieren.xml') {
+    			
+    			if ($infoEntry['name'] == 'apple_health_export/Exportieren.xml' ||
+    				$infoEntry['name'] == 'apple_health_export/Export.xml' ||
+    				$infoEntry['name'] == 'Exportieren.xml') {
     				
     				return stream_get_contents($za->getStream($infoEntry['name']));
     			}
