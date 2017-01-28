@@ -17,7 +17,7 @@
 							</li>
                 		</ul>
                         <div class="search">
-                            <form role="form">
+                            <form>
                                 <input type="text" class="search-form" autocomplete="off" placeholder="Search">
                                 <i class="fa fa-search"></i>
                             </form>
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-inverse" role="banner">
+    <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
             	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

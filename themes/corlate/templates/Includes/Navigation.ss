@@ -14,7 +14,7 @@
 		    <ul class="dropdown-menu">
 		      <% loop $Children %>
 		        <li class="$LinkingMode">
-		        	<li><a href="{$Link}">{$Title.XML}</a></li>
+		        	<a href="{$Link}">{$Title.XML}</a>
 		        </li>
 		      <% end_loop %>
 		    </ul>

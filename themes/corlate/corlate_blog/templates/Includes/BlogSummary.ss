@@ -18,7 +18,7 @@
         <div class="col-xs-12 col-sm-10 blog-content">
       	    <% if $HeadImage %>
 				<% with $HeadImage %>
-					<a href="{$Up.Link}"><img class="img-responsive img-blog" src="{$URL}" width="100%" alt="{$Up.Title}" /></a>
+					<a href="{$Up.Link}"><img class="img-responsive img-blog" src="{$URL}" alt="{$Up.Title}" /></a>
 				<% end_with %>
 			<% end_if %>
             <h2><a href="{$Link}" title="<% _t('BlogSummary_ss.VIEWFULL', 'View full post titled -') %> '$Title'">{$MenuTitle}</a></h2>

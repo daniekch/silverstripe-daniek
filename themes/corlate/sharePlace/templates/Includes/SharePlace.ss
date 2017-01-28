@@ -15,7 +15,7 @@
 				<p>
 					<% if $ShareType == 'Picture' %>
 						<% with $Picture %>
-							<img class="img-responsive img-blog" src="{$URL}" width="100%" alt="{$Up.Title}" />
+							<img class="img-responsive img-blog" src="{$URL}" alt="{$Up.Title}" />
 						<% end_with %>
 					<% else_if $ShareType == 'Location' %>
 						<script>

@@ -29,7 +29,7 @@
 		                        <div class="col-sm-6 hidden-xs animation animated-item-4">
 		                            <div class="slider-img">
 		                            	<% with $OverlayImage %>
-		                                	<img src="{$URL}" class="img-responsive">
+		                                	<img src="{$URL}" alt="{$Title}" class="img-responsive">
 		                                <% end_with %>
 		                            </div>
 		                        </div>

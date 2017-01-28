@@ -10,7 +10,7 @@
                 <div class="blog-item">
                 	<% if $FeaturedImage %>
 						<% with $FeaturedImage %>
-							<img class="img-responsive img-blog" src="{$URL}" width="100%" alt="{$Up.Title}" />
+							<img class="img-responsive img-blog" src="{$URL}" alt="{$Up.Title}" />
 						<% end_with %>
 					<% end_if %>
                     <div class="row">  

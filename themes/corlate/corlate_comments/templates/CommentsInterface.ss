@@ -36,7 +36,7 @@
 		<p id="$CommentHolderID_PostCommentForm_error" class="message good"><% _t('CommentsInterface_ss.AWAITINGMODERATION', 'Your comment has been submitted and is now awaiting moderation.') %></p>
 	<% end_if %>
 	
-	<div id="contact-page clearfix">
+	<div class="contact-page clearfix">
            <div class="status alert alert-success" style="display: none"></div>
            <div class="message_heading">
                <h4>Hinerlasse einen Kommentar</h4>
