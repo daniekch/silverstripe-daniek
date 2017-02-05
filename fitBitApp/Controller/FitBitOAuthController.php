@@ -1,6 +1,6 @@
 <?php
 
-class FitBitOAuthController extends Controller {
+class FitBitController extends Controller {
 	
 	private $config;
 	
@@ -106,7 +106,6 @@ class FitBitOAuthController extends Controller {
 					
 					if (intval($id) > 0) {
 						
-						$hasValidEntries = true;
 						SS_Log::log('Write recorde to dirty with subscription ID '.$id, SS_Log::INFO);
 					}
 				}

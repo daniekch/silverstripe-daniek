@@ -1,6 +1,7 @@
 <?php
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Token\AccessToken;
 
 class FitBitOAuth2Repository implements IFitBitOAuth2Repository {
 	
@@ -22,7 +23,7 @@ class FitBitOAuth2Repository implements IFitBitOAuth2Repository {
 	 */
 	public function SaveAccessToken($var) {
 		
-		Session::set(self::ACCESS_TOKEN, $var);
+		Session::set(self::ACCESS_TOKEN, serialize($var));
 	}
 	
 	/*
@@ -30,7 +31,7 @@ class FitBitOAuth2Repository implements IFitBitOAuth2Repository {
 	 */
 	public function ReadAccessToken() {
 		
-		return Session::get(self::ACCESS_TOKEN);
+		return unserialize(Session::get(self::ACCESS_TOKEN));
 	}
 	
 	/*
@@ -86,9 +87,14 @@ class FitBitOAuth2Repository implements IFitBitOAuth2Repository {
 				
 				try {
 					
-					return $this->provider->getAccessToken('refresh_token', [
+					// Renew accessToken and save in local session
+					$accessToken = $this->provider->getAccessToken('refresh_token', [
 							'refresh_token' => $existingAccessToken->getRefreshToken()
 					]);
+					
+					$this->SaveAccessToken($accessToken);
+					
+					return $accessToken;
 				}
 				catch (IdentityProviderException $exception) {
 					

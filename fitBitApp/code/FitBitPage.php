@@ -94,15 +94,15 @@ class FitBitPage_Controller extends Page_Controller {
 				catch (IdentityProviderException $exception) {
 					
 					if ($exception->getCode() == 400 || $exception->getCode() == 404) {
-							
+						
 						$this->IsGlobalError = true;
 					}
 					elseif ($exception->getCode() == 401) {
-					
+						
 						$this->IsUnauthorized = true;
 					}
 					elseif ($exception->getCode() == 403) {
-							
+						
 						$this->IsForbidden = true;
 					}
 					elseif ($exception->getCode() == 429) {

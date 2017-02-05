@@ -9,7 +9,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 	private $provider;
 	
 	function __construct() {
-		 
+		
 		$this->config = Config::inst();
 		$this->provider = Injector::inst()->create('FitBitProvider');
 	}
@@ -138,7 +138,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 		}
 	
 		if ($activities == null) {
-				
+			
 			$activities = $this->CreateActivities($member, $accessToken, $date);
 		}
 		
@@ -148,7 +148,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 		// If data unsubscribed then subscribe it by fitbit notification
 		if ($activities->Subscribed == false) {
 			
-			if ($this->AddSubscription($member, $accessToken, 'activities', $activities->ID, $this->config->get('Subscriber', 'id'))) {
+			if ($this->AddRemoteSubscription($member, $accessToken, 'activities', $activities->ID, $this->config->get('Subscriber', 'id'))) {
 				
 				$activities->Subscribed = true;
 				$activities->SubscriptionDate = date('Y-m-d H:i:s');
@@ -261,55 +261,13 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 	 */
 	public function MarkAsDirty($id) {
 		
-		$subscription = FitBitSubscription::get_by_id('FitBitSubscription', intval($id));
+		$data = DataObject::get_by_id('FitBitData', intval($id));
 		
-		if (!empty($subscription)) {
-			
-			$data = $subscription->Collection();
-			
-			if (!empty($data)) {
+		if (!empty($data)) {
 				
-				$data->Dirty = true;
-				
-				return $data->write();
-			}
-		}
-		
-		return 0;
-	}
-	
-	/*
-	 * Delete subscription.
-	 */
-	public function DeleteSubscription($id){
-		
-		$subscription = FitBitSubscription::get_by_id('FitBitSubscription', intval($id));
-		
-		if (!empty($subscription)) {
+			$data->Dirty = true;
 			
-			$subscription->delete();
-				
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public function CreateSubscription($member, $subscriberId, $dataId = null) {
-		
-		if (!empty($member)) {
-			
-			$subscription = new FitBitSubscription();
-			$subscription->MemberID = $member->ID;
-			$subscription->SubscriberId = $subscriberId;
-			
-			// If not deserted
-			if (!empty($dataId)) {
-				
-				$subscription->CollectionID = $dataId;
-			}
-			
-			return $subscription->write();
+			return $data->write();
 		}
 		
 		return 0;
@@ -406,7 +364,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 	/*
 	 * Add subscription
 	 */
-	private function AddSubscription($member, $accessToken, $collectionpath, $subscriptionId, $subscriberId) {
+	private function AddRemoteSubscription($member, $accessToken, $collectionpath, $subscriptionId, $subscriberId) {
 		
 		$url = FitBitProvider::BASE_FITBIT_API_URL.'/1/user/'.$member->FitBitID.'/'.$collectionpath.'/apiSubscriptions/'.$subscriptionId.'.json';
 		
@@ -431,7 +389,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 	}
 	
 	/*
-	 * Get subscriptio from user.
+	 * Get subscription from user.
 	 */
 	private function GetRemoteSubscription($member, $accessToken, $collectionpath) {
 	
@@ -443,7 +401,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 				$accessToken
 				);
 		try {
-				
+			
 			$subscription = $this->provider->getResponse($request);
 			
 			return $subscription;
@@ -452,7 +410,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 				
 			SS_Log::log($exception, SS_Log::WARN);
 		}
-	
+		
 		return null;
 	}
 	
