@@ -355,7 +355,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 									[FitBitProvider::HEADER_ACCEPT_LOCALE => 'de_DE']]
 					);
 				
-			return $this->provider->getResponse($request);
+			return $this->provider->getParsedResponse($request);
 		}
 		
 		return null;
@@ -376,7 +376,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 					);
 		try {
 			
-			$response = $this->provider->getResponse($request);
+			$response = $this->provider->getParsedResponse($request);
 		}
 		catch (IdentityProviderException $exception) {
 			
@@ -402,7 +402,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 				);
 		try {
 			
-			$subscription = $this->provider->getResponse($request);
+			$subscription = $this->provider->getParsedResponse($request);
 			
 			return $subscription;
 		}
@@ -429,7 +429,7 @@ class FitBitRessourcenRepository implements IFitBitRessourcenRepository {
 					);
 		try {
 			
-			$response = $this->provider->getResponse($request);
+			$response = $this->provider->getParsedResponse($request);
 		}
 		catch (IdentityProviderException $exception) {
 			
