@@ -15,10 +15,10 @@ class CanopusHAController extends Controller {
 	);
 	
 	private $mysql_credentials = [
-			'host'     => 'caceaf6.mysql.db.internal',
-			'user'     => 'caceaf6_daniek',
-			'password' => 'felRe76!',
-			'database' => 'caceaf6_daniekTelegram'
+			'host'     => '*****',
+			'user'     => '*****',
+			'password' => '*****',
+			'database' => '*****'
 	];
 	
 	public function init() {
